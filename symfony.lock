@@ -232,6 +232,9 @@
             "templates/base.html.twig"
         ]
     },
+    "symfony/ux-turbo": {
+        "version": "v2.10.0"
+    },
     "symfony/ux-vue": {
         "version": "2.10",
         "recipe": {
