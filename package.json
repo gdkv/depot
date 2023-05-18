@@ -1,0 +1,9 @@
+{
+    "devDependencies": {
+        "@hotwired/stimulus": "^3.0.0",
+        "@symfony/stimulus-bridge": "^3.2.0",
+        "@symfony/ux-vue": "file:vendor/symfony/ux-vue/assets",
+        "vue": "^3.0",
+        "vue-loader": "^17.2.2"
+    }
+}
