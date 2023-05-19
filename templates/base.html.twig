@@ -13,11 +13,8 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}
-            <h2>TEST</h2>
+        <h2>TEST</h2>
 
-            <div {{ vue_component('controllers/Hello', { 'name': 'Dima' }) }}></div>
-
-        {% endblock %}
+        <div {{ vue_component('controllers/Hello', { 'name': '👋' }) }}></div>
     </body>
 </html>
