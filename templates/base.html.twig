@@ -13,6 +13,11 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {% block body %}
+            <h2>TEST</h2>
+
+            <div {{ vue_component('controllers/Hello', { 'name': 'Dima' }) }}></div>
+
+        {% endblock %}
     </body>
 </html>
