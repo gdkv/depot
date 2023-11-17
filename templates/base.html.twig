@@ -16,7 +16,7 @@
         <div class="">
             <img src="{{ asset('/build/images/depo.svg') }}"  alt=""/>
         </div>
-        <h2>TEST</h2>
+        <h2>{{ 'main.hello' | trans }}</h2>
 
         <div {{ vue_component('controllers/Hello', { 'name': '👋' }) }}></div>
     </body>

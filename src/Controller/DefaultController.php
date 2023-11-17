@@ -8,7 +8,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends AbstractController
 {
-    #[Route(path: '/', name: 'app.index')]
+    #[Route(
+        path: '/{_locale}',
+        name: 'app.index',
+        requirements: ['_locale' => 'ru|en'],
+        defaults: ['_locale' => 'ru']
+    )]
     public function __invoke(): Response
     {
         return $this->render('base.html.twig', []);
