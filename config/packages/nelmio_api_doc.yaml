@@ -1,9 +1,23 @@
 nelmio_api_doc:
     documentation:
         info:
-            title: My App
-            description: This is an awesome app!
-            version: 1.0.0
+            title: 'Депо. Документация к API'
+            description: 'Приложение Депо, помогает мониторить климат в помещении где подключены сенсоры, устанавливать лимиты и оповещать об их превышении. <br />Приложение имеет внутреннее закрытое API, а так же внешнее через токен который генерируется в Личном кабинете'
+            version: 0.0.1
+        servers:
+            - url: http://depot.test
+              description: Local
+            - url: https://depo.epictest.ru
+              description: Production
+        tags:
+            - name: Сенсор
+              description: 'Эндпоинты API для сенсоров: создание, редактирование и удаление, а так же получение их списка'
+        components:
+            securitySchemes:
+                Bearer:
+                    type: http
+                    scheme: bearer
+                    bearerFormat: JWT
     areas: # to filter documented areas
         path_patterns:
             - ^/api(?!/doc$) # Accepts routes under /api except /api/doc
