@@ -1,8 +1,12 @@
 <template>
-    <h1>Hello {{ name }}!</h1>
+    <h1> {{ transName }}!</h1>
 </template>
 
 <script setup>
+  import { trans, MAIN_VUE_HELLO} from '../../translator';
+
+    const transName = trans(MAIN_VUE_HELLO)
+
     defineProps({
         name: String
     });

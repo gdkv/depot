@@ -1,2 +1,3 @@
 main:
   hello: 'Привет'
+  vue_hello: 'Привет vue!'
