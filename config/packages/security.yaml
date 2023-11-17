@@ -5,11 +5,27 @@ security:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
 
     providers:
-#        jwt:
-#            lexik_jwt:
-#                class: App\Entity\Security\User
-        users_in_memory: { memory: null }
+        jwt:
+            lexik_jwt:
+                class: App\Entity\Security\User
+        users_in_memory:
+            memory:
+                users:
+                    admin: { password: '$2y$13$/RL.Mx4FC3J44MJEAE3jvubgtZUC.y6r95miQ0TMj.6tLfltilfSO', roles: [ 'ROLE_ADMIN' ] }
     firewalls:
+        api_login:
+            pattern: ^/api/login_check
+            stateless: true
+            json_login:
+                provider: users_in_memory
+                check_path: /api/login_check #same as the route configured in config/routes.yaml
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+        api:
+            pattern: ^/api
+            stateless: true
+            provider: jwt
+            jwt: ~
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
@@ -22,25 +38,10 @@ security:
 
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
-
-        jwt_auth:
-            pattern: ^/api/auth
-            stateless: true
-            #            provider: jwt
-            json_login:
-                check_path: /api/auth
-                success_handler: lexik_jwt_authentication.handler.authentication_success
-                failure_handler: lexik_jwt_authentication.handler.authentication_failure
-
-        api:
-            pattern: ^/api
-            stateless: true
-            #            provider: jwt
-            jwt: ~
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/api/auth, roles: PUBLIC_ACCESS }
+        - { path: ^/api/login_check, roles: PUBLIC_ACCESS }
         - { path: ^/api/doc, roles: PUBLIC_ACCESS }
         - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
 
