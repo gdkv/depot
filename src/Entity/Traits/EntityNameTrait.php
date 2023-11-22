@@ -1,19 +1,20 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Traits;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use OpenApi\Attributes as OA;
 use Symfony\Component\Validator\Constraints as Assert;
 
 trait EntityNameTrait {
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: Types::STRING, length: 255)]
     #[OA\Property(description: 'Имя')]
     #[Assert\NotBlank]
     private ?string $name;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: Types::STRING, length: 255)]
     #[OA\Property(description: 'Ключевое слово')]
     #[Assert\NotBlank]
     private ?string $slug;

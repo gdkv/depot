@@ -2,63 +2,91 @@
 
 namespace App\Entity\Security;
 
-use App\Entity\EntityIdTrait;
-use Lexik\Bundle\JWTAuthenticationBundle\Security\User\JWTUserInterface;
+use App\Entity\Traits\EntityIdTrait;
+use App\Repository\Security\UserRepository;
+use OpenApi\Attributes as OA;
+use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
-final class User implements JWTUserInterface, PasswordAuthenticatedUserInterface
+#[ORM\Entity(repositoryClass: UserRepository::class)]
+#[OA\Schema(title: 'Пользователь')]
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     use EntityIdTrait;
 
+    #[ORM\Column(type: Types::STRING, length: 255)]
+    #[Assert\Email]
+    #[Assert\NotBlank]
+    #[OA\Property(title: 'Email', description: 'Email пользователя', type: 'string')]
     private ?string $email;
+
+    #[ORM\Column(type: Types::JSON)]
+    #[OA\Property(
+        title: 'Роль',
+        description: 'Набор ролей пользователя',
+        type: 'array',
+        items: new OA\Items(type: 'string')
+    )]
     private ?array $roles;
-    private string $username;
 
-    public function __construct($username, ?array $roles, ?string $email)
+    #[ORM\Column(type: Types::STRING)]
+    #[Assert\NotBlank]
+    #[OA\Property(title: 'Пароль', description: 'Пароль пользователя', type: 'string')]
+    private string $password;
+
+    #[ORM\Column(type: Types::STRING)]
+    #[OA\Property(title: 'Имя', description: 'Имя пользователя', type: 'string')]
+    private string $name;
+
+    public function __construct(
+        string $email,
+        string $name,
+        string $password,
+        array $roles
+    )
     {
-        $this->username = $username;
-        $this->roles = $roles;
         $this->email = $email;
+        $this->name = $name;
+        $this->password = $password;
+        $this->roles = $roles;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public static function createFromPayload($username, array $payload): User
+    public function getEmail(): ?string
     {
-        return new self(
-            $username,
-            $payload['roles'] ?? null, // Added by default
-            $payload['email'] ?? null  // Custom
-        );
+        return $this->email;
     }
 
-    /**
-     * @inheritDoc
-     */
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+
     public function getRoles(): array
     {
-        return $this->roles;
+        $roles = $this->roles;
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function eraseCredentials()
+
+    public function eraseCredentials(): void
     {
         // TODO: Implement eraseCredentials() method.
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getUserIdentifier(): string
     {
-        return $this->username;
+        return $this->email;
     }
 
     public function getPassword(): ?string
     {
-        return $this->username;
+        return $this->password ?? null;
     }
 }

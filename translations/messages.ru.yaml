@@ -1,3 +1,5 @@
 main:
   hello: 'Привет'
   vue_hello: 'Привет vue!'
+
+user_create_exception: 'ТЕСТ'

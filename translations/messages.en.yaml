@@ -1,3 +1,5 @@
 main:
   hello: 'Hello!!🤫❌🤖'
   vue_hello: 'Hello vue!'
+
+user_create_exception: 'ТЕСТ EN'

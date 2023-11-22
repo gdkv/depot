@@ -2,9 +2,9 @@
 
 namespace App\Entity\Sensor;
 
-use App\Entity\EntityDefaultTrait;
-use App\Entity\EntityIdTrait;
-use App\Entity\EntityNameTrait;
+use App\Entity\Traits\EntityDefaultTrait;
+use App\Entity\Traits\EntityIdTrait;
+use App\Entity\Traits\EntityNameTrait;
 use App\Repository\Sensor\SensorRepository;
 use Doctrine\ORM\Mapping as ORM;
 
