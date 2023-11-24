@@ -8,11 +8,14 @@ use OpenApi\Attributes as OA;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ORM\Table(name: '`users`')]
 #[OA\Schema(title: 'Пользователь')]
+#[UniqueEntity(fields: 'email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     use EntityIdTrait;
@@ -44,13 +47,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct(
         string $email,
         string $name,
-        string $password,
         array $roles
     )
     {
         $this->email = $email;
         $this->name = $name;
-        $this->password = $password;
         $this->roles = $roles;
     }
 
@@ -88,5 +89,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getPassword(): ?string
     {
         return $this->password ?? null;
+    }
+
+    public function setPassword(string $hashPassword): self
+    {
+        $this->password = $hashPassword;
+        return $this;
     }
 }

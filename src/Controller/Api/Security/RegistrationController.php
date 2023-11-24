@@ -42,11 +42,7 @@ class RegistrationController extends AbstractController
     public function __invoke(UserDto $userDto, UserCreateService $userCreateService): JsonResponse
     {
         try {
-            if (
-                ($userCreateService)($userDto)
-            ) {
-                return $this->jsonResponse(['response' => $userCreateService->getUser()]);
-            }
+            ($userCreateService)($userDto);
         } catch (AppException $e) {
             return $this->jsonResponseError(
                 $e->getErrorMessage(),
@@ -60,5 +56,7 @@ class RegistrationController extends AbstractController
                 $e->getCode(),
             );
         }
+
+        return $this->jsonResponse(['response' => $userCreateService->getUser()]);
     }
 }
