@@ -15,4 +15,16 @@ class Zone
     use EntityIdTrait;
     use EntityDefaultTrait;
     use EntityNameTrait;
+
+    public function __construct(
+        string $name,
+        ?string $slug,
+        ?int $position,
+        ?bool $active
+    ){
+        $this->name = $name;
+        $this->slug = $slug ?? '';
+        $this->position = $position ?? 100;
+        $this->active = $active ?? true;
+    }
 }

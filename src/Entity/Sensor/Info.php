@@ -16,35 +16,31 @@ class Info
     use EntityIdTrait;
     use EntityCreatedAtTrait;
 
-    #[ORM\Column(type: Types::FLOAT)]
-    #[OA\Property(description: 'Влажность')]
-    private float $humidity;
-
-    #[ORM\Column(type: Types::FLOAT)]
-    #[OA\Property(description: 'Давление')]
-    private float $pressure;
-
-    #[ORM\Column(type: Types::FLOAT)]
-    #[OA\Property(description: 'Уровень CO2')]
-    private float $co2;
-
-    #[ORM\Column(type: Types::FLOAT)]
-    #[OA\Property(description: 'Температура')]
-    private float $temperature;
-
-    #[ORM\Column(type: Types::FLOAT)]
-    #[OA\Property(description: 'Освещеность')]
-    private float $lux;
-
-    #[ORM\Column(type: Types::FLOAT)]
-    #[OA\Property(description: 'Шум')]
-    private float $decibel;
-
     public function __construct(
+        #[ORM\Column(type: Types::FLOAT)]
+        #[OA\Property(description: 'Влажность')]
+        private readonly float $humidity,
 
-    )
-    {
-    }
+        #[ORM\Column(type: Types::FLOAT)]
+        #[OA\Property(description: 'Давление')]
+        private readonly float $pressure,
+
+        #[ORM\Column(type: Types::FLOAT)]
+        #[OA\Property(description: 'Уровень CO2')]
+        private readonly float $co2,
+
+        #[ORM\Column(type: Types::FLOAT)]
+        #[OA\Property(description: 'Температура')]
+        private readonly float $temperature,
+
+        #[ORM\Column(type: Types::FLOAT)]
+        #[OA\Property(description: 'Освещеность')]
+        private readonly float $lux,
+
+        #[ORM\Column(type: Types::FLOAT)]
+        #[OA\Property(description: 'Шум')]
+        private readonly float $decibel,
+    ){}
 
     public function getHumidity(): float
     {
