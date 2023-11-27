@@ -3,3 +3,10 @@ main:
   vue_hello: 'Привет vue!'
 
 user_create_exception: 'ТЕСТ'
+
+sensor:
+  type:
+    default: 'Обычный'
+    electric: 'Электричество'
+    aqua: 'Водный'
+    motion: 'Движение'

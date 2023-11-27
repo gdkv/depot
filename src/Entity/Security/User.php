@@ -13,7 +13,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[ORM\Table(name: '`users`')]
 #[OA\Schema(title: 'Пользователь')]
 #[UniqueEntity(fields: 'email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
