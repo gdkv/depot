@@ -5,6 +5,7 @@ namespace App\Entity\Traits;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use OpenApi\Attributes as OA;
+use Symfony\Component\String\Slugger\AsciiSlugger;
 use Symfony\Component\Validator\Constraints as Assert;
 
 trait EntityNameTrait {
@@ -24,22 +25,14 @@ trait EntityNameTrait {
         return $this->name;
     }
 
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
     public function getSlug(): ?string
     {
         return $this->slug;
     }
 
-    public function setSlug(string $slug): self
+    #[ORM\PrePersist]
+    public function onPrePersist(): void
     {
-        $this->slug = $slug;
-
-        return $this;
+        $this->slug = (new AsciiSlugger())->slug($this->name);
     }
 }

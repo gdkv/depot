@@ -15,6 +15,7 @@ use OpenApi\Attributes as OA;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
+#[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: SensorRepository::class)]
 #[UniqueEntity(fields: 'macAddress')]
 #[OA\Schema(title: 'Сенсор')]
@@ -39,23 +40,31 @@ class Sensor
         enum: SensorType::class,
         example: SensorType::Default
     )]
-    private SensorType $type = SensorType::Default;
+    private SensorType $type;
 
     #[ORM\OneToMany(mappedBy: 'sensor', targetEntity: Info::class)]
     #[ORM\OrderBy(['createdAt' => 'ASC'])]
     private ?Collection $info;
 
     public function __construct(
+        string $name,
         string $macAddress,
-        Zone $zone,
-        SensorType $type,
+        ?string $slug,
+        ?Zone $zone,
+        ?SensorType $type,
         ?Collection $info,
+        ?int $position,
+        ?bool $active,
     )
     {
+        $this->name = $name;
         $this->macAddress = $macAddress;
-        $this->zone = $zone;
-        $this->type = $type;
-        $this->info = $info;
+        $this->zone = $zone ?? null;
+        $this->slug = $slug ?? '';
+        $this->type = $type ?? SensorType::Default;
+        $this->info = $info ?? [];
+        $this->position = $position ?? 100;
+        $this->active = $active ?? true;
     }
 
     public function getMacAddress(): string

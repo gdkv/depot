@@ -6,11 +6,10 @@ use App\Entity\Traits\EntityCreatedAtTrait;
 use App\Entity\Traits\EntityIdTrait;
 use App\Repository\Sensor\InfoRepository;
 use Doctrine\DBAL\Types\Types;
-use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 use Doctrine\ORM\Mapping as ORM;
 use OpenApi\Attributes as OA;
 
-#[HasLifecycleCallbacks]
+#[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: InfoRepository::class)]
 class Info
 {
@@ -40,4 +39,40 @@ class Info
     #[ORM\Column(type: Types::FLOAT)]
     #[OA\Property(description: 'Шум')]
     private float $decibel;
+
+    public function __construct(
+
+    )
+    {
+    }
+
+    public function getHumidity(): float
+    {
+        return $this->humidity;
+    }
+
+    public function getPressure(): float
+    {
+        return $this->pressure;
+    }
+
+    public function getCo2(): float
+    {
+        return $this->co2;
+    }
+
+    public function getTemperature(): float
+    {
+        return $this->temperature;
+    }
+
+    public function getLux(): float
+    {
+        return $this->lux;
+    }
+
+    public function getDecibel(): float
+    {
+        return $this->decibel;
+    }
 }
