@@ -33,6 +33,8 @@ trait EntityNameTrait {
     #[ORM\PrePersist]
     public function onPrePersist(): void
     {
-        $this->slug = (new AsciiSlugger())->slug($this->name);
+        $this->slug = (new AsciiSlugger())
+            ->slug($this->name)
+            ->lower();
     }
 }

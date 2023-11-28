@@ -24,4 +24,12 @@ trait EntityCreatedAtTrait {
     {
         return $this->createdAt;
     }
+
+    // for InfoFixtures only
+    public function setCreatedAtToPast($minusMinutes): self
+    {
+        $this->createdAt = $this->createdAt
+            ->sub(new \DateInterval("PT{$minusMinutes}M"));
+        return $this;
+    }
 }

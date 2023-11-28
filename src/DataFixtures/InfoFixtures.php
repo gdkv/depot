@@ -18,6 +18,7 @@ class InfoFixtures extends Fixture implements DependentFixtureInterface
             $i++;
             $this->setReference("info-{$i}", $entity);
             $manager->persist($entity);
+            $entity->setCreatedAtToPast($i*5);
         }
         $manager->flush();
     }
