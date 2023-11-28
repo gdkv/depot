@@ -2,6 +2,7 @@
 
 namespace App\Entity\Sensor;
 
+use App\Entity\Security\User;
 use App\Entity\Traits\EntityDefaultTrait;
 use App\Entity\Traits\EntityIdTrait;
 use App\Entity\Traits\EntityNameTrait;
@@ -46,23 +47,26 @@ class Sensor
     #[ORM\OrderBy(['createdAt' => 'ASC'])]
     private ?Collection $info;
 
+    #[ORM\OneToOne(targetEntity: User::class)]
+    private User $user;
+
     public function __construct(
         string $name,
         string $macAddress,
+        User $user,
         ?string $slug,
         ?Zone $zone,
         ?SensorType $type,
-        ?Collection $info,
         ?int $position,
         ?bool $active,
     )
     {
         $this->name = $name;
         $this->macAddress = $macAddress;
+        $this->user = $user;
         $this->zone = $zone ?? null;
         $this->slug = $slug ?? '';
         $this->type = $type ?? SensorType::Default;
-        $this->info = $info ?? [];
         $this->position = $position ?? 100;
         $this->active = $active ?? true;
     }
@@ -75,6 +79,11 @@ class Sensor
     public function getZone(): Zone
     {
         return $this->zone;
+    }
+
+    public function getUser(): User
+    {
+        return $this->user;
     }
 
     public function getType(): SensorType

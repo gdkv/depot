@@ -7,6 +7,7 @@ use App\Entity\Traits\EntityIdTrait;
 use App\Repository\Sensor\InfoRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Nelmio\ApiDocBundle\Annotation\Model;
 use OpenApi\Attributes as OA;
 
 #[ORM\HasLifecycleCallbacks]
@@ -40,6 +41,10 @@ class Info
         #[ORM\Column(type: Types::FLOAT)]
         #[OA\Property(description: 'Шум')]
         private readonly float $decibel,
+
+        #[ORM\ManyToOne(targetEntity: Sensor::class, inversedBy: 'info')]
+        #[OA\Property(ref: new Model(type: Sensor::class), description: 'Сенсор')]
+        private readonly Sensor $sensor
     ){}
 
     public function getHumidity(): float

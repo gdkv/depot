@@ -4,6 +4,7 @@ namespace App\Controller\Api\Sensor;
 
 use App\Controller\Api\JsonResponseTrait;
 use App\Entity\Sensor\Sensor;
+use App\Repository\Sensor\SensorRepository;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -32,8 +33,10 @@ class ListController extends AbstractController
     )]
     #[OA\Tag(name: 'Сенсор')]
     #[Security(name: 'Bearer')]
-    public function __invoke(): JsonResponse
+    public function __invoke(SensorRepository $repository): JsonResponse
     {
-        return $this->jsonResponse();
+        return $this->jsonResponse(
+            $repository->findAll()
+        );
     }
 }

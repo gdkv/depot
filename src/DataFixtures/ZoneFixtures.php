@@ -14,7 +14,7 @@ class ZoneFixtures extends Fixture
         $i = 0;
         foreach ($this->entities() as $entity) {
             $i++;
-            $this->setReference("info-{$i}", $entity);
+            $this->setReference("zone-{$i}", $entity);
             $manager->persist($entity);
         }
         $manager->flush();

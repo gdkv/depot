@@ -4,10 +4,11 @@ namespace App\DataFixtures;
 
 use App\Entity\Sensor\Info;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Generator;
 
-class InfoFixtures extends Fixture
+class InfoFixtures extends Fixture implements DependentFixtureInterface
 {
 
     public function load(ObjectManager $manager): void
@@ -21,11 +22,22 @@ class InfoFixtures extends Fixture
         $manager->flush();
     }
 
+    public function getDependencies(): array
+    {
+        return [
+            SensorFixtures::class,
+        ];
+    }
+
     private function entities(): Generator
     {
         for ($i = 0; $i < 100; $i++) {
-            yield new Info($this->generateHumidity(), $this->generatePressure(), $this->generateCO2(),
-                $this->generateTemperature(), $this->generateLux(), $this->generateDecibel());
+            yield new Info(
+                $this->generateHumidity(), $this->generatePressure(),
+                $this->generateCO2(), $this->generateTemperature(),
+                $this->generateLux(), $this->generateDecibel(),
+                $this->getReference('sensor-1')
+            );
         }
 
     }
