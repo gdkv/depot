@@ -22,7 +22,7 @@ class ListController extends AbstractController
      * Этот запрос вернет список всех активных и неактивных сенсоров пользователя, в будущем должны появиться
      * GET параметры в виде фильтров или заменить на POST и передавать их в теле запроса
      */
-    #[Route(path: '/api/sensor', name: 'api.product.list', methods: ['GET'])]
+    #[Route(path: '/api/sensor', name: 'api.sensor.list', methods: ['GET'])]
     #[OA\Response(
         response: 200,
         description: '',
@@ -35,8 +35,15 @@ class ListController extends AbstractController
     #[Security(name: 'Bearer')]
     public function __invoke(SensorRepository $repository): JsonResponse
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         return $this->jsonResponse(
-            $repository->findAll()
+            $repository->findBy(
+                ['user' => $this->getUser(), 'active' => true,],
+                ['position' => 'DESC',],
+                100,
+                0
+            ),
         );
     }
 }

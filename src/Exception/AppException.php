@@ -62,7 +62,6 @@ class AppException extends HttpException implements AppExceptionInterface
     public function getErrorMessage(): string
     {
         // $tr = new TranslatableMessage(static::ERROR_KEY, [], 'messages');
-        // dd($tr->trans(new Tra));
         return static::ERROR_KEY;
     }
 }

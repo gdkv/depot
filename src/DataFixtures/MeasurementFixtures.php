@@ -2,13 +2,13 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Sensor\Info;
+use App\Entity\Sensor\Measurement;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Generator;
 
-class InfoFixtures extends Fixture implements DependentFixtureInterface
+class MeasurementFixtures extends Fixture implements DependentFixtureInterface
 {
 
     public function load(ObjectManager $manager): void
@@ -16,7 +16,7 @@ class InfoFixtures extends Fixture implements DependentFixtureInterface
         $i = 0;
         foreach ($this->entities() as $entity) {
             $i++;
-            $this->setReference("info-{$i}", $entity);
+            $this->setReference("measurement-{$i}", $entity);
             $manager->persist($entity);
             $entity->setCreatedAtToPast($i*5);
         }
@@ -33,7 +33,7 @@ class InfoFixtures extends Fixture implements DependentFixtureInterface
     private function entities(): Generator
     {
         for ($i = 0; $i < 100; $i++) {
-            yield new Info(
+            yield new Measurement(
                 $this->generateHumidity(), $this->generatePressure(),
                 $this->generateCO2(), $this->generateTemperature(),
                 $this->generateLux(), $this->generateDecibel(),

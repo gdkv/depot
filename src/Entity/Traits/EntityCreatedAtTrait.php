@@ -7,6 +7,7 @@ use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use OpenApi\Attributes as OA;
+use Symfony\Component\Serializer\Annotation\Ignore;
 
 trait EntityCreatedAtTrait {
 
@@ -25,7 +26,7 @@ trait EntityCreatedAtTrait {
         return $this->createdAt;
     }
 
-    // for InfoFixtures only
+    #[Ignore]
     public function setCreatedAtToPast($minusMinutes): self
     {
         $this->createdAt = $this->createdAt

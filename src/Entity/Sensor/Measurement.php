@@ -4,15 +4,16 @@ namespace App\Entity\Sensor;
 
 use App\Entity\Traits\EntityCreatedAtTrait;
 use App\Entity\Traits\EntityIdTrait;
-use App\Repository\Sensor\InfoRepository;
+use App\Repository\Sensor\MeasurementRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use OpenApi\Attributes as OA;
+use Symfony\Component\Serializer\Annotation\Ignore;
 
 #[ORM\HasLifecycleCallbacks]
-#[ORM\Entity(repositoryClass: InfoRepository::class)]
-class Info
+#[ORM\Entity(repositoryClass: MeasurementRepository::class)]
+class Measurement
 {
     use EntityIdTrait;
     use EntityCreatedAtTrait;
@@ -42,7 +43,8 @@ class Info
         #[OA\Property(description: 'Шум')]
         private readonly float $decibel,
 
-        #[ORM\ManyToOne(targetEntity: Sensor::class, inversedBy: 'info')]
+        #[Ignore]
+        #[ORM\ManyToOne(targetEntity: Sensor::class, inversedBy: 'measurement')]
         #[OA\Property(ref: new Model(type: Sensor::class), description: 'Сенсор')]
         private readonly Sensor $sensor
     ){}

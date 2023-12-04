@@ -43,9 +43,9 @@ class Sensor
     )]
     private SensorType $type;
 
-    #[ORM\OneToMany(mappedBy: 'sensor', targetEntity: Info::class)]
+    #[ORM\OneToMany(mappedBy: 'sensor', targetEntity: Measurement::class)]
     #[ORM\OrderBy(['createdAt' => 'ASC'])]
-    private ?Collection $info;
+    private ?Collection $measurement;
 
     #[ORM\OneToOne(targetEntity: User::class)]
     private User $user;
@@ -93,6 +93,6 @@ class Sensor
 
     public function getInfo(): ?Collection
     {
-        return $this->info;
+        return $this->measurement;
     }
 }
