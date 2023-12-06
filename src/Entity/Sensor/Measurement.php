@@ -7,7 +7,6 @@ use App\Entity\Traits\EntityIdTrait;
 use App\Repository\Sensor\MeasurementRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Nelmio\ApiDocBundle\Annotation\Model;
 use OpenApi\Attributes as OA;
 use Symfony\Component\Serializer\Annotation\Ignore;
 
@@ -45,7 +44,6 @@ class Measurement
 
         #[Ignore]
         #[ORM\ManyToOne(targetEntity: Sensor::class, inversedBy: 'measurement')]
-        #[OA\Property(ref: new Model(type: Sensor::class), description: 'Сенсор')]
         private readonly Sensor $sensor
     ){}
 

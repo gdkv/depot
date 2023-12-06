@@ -9,9 +9,9 @@ use App\Entity\Traits\EntityNameTrait;
 use App\Model\Enum\SensorType;
 use App\Repository\Sensor\SensorRepository;
 use App\Validator\ConstraintsMacAddress;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 use OpenApi\Attributes as OA;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -45,7 +45,12 @@ class Sensor
 
     #[ORM\OneToMany(mappedBy: 'sensor', targetEntity: Measurement::class)]
     #[ORM\OrderBy(['createdAt' => 'ASC'])]
-    private ?Collection $measurement;
+    #[OA\Property(
+        description: 'Измерения',
+        type: 'array',
+        items: new OA\Items(ref: Measurement::class)
+    )]
+    private PersistentCollection $measurement;
 
     #[ORM\OneToOne(targetEntity: User::class)]
     private User $user;
@@ -91,7 +96,7 @@ class Sensor
         return $this->type;
     }
 
-    public function getInfo(): ?Collection
+    public function getMeasurement(): PersistentCollection
     {
         return $this->measurement;
     }
