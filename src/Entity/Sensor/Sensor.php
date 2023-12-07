@@ -52,13 +52,13 @@ class Sensor
     )]
     private PersistentCollection $measurement;
 
-    #[ORM\OneToOne(targetEntity: User::class)]
-    private User $user;
+    #[ORM\ManyToOne(targetEntity: User::class)]
+    private ?User $user;
 
     public function __construct(
         string $name,
         string $macAddress,
-        User $user,
+        ?User $user,
         ?string $slug,
         ?Zone $zone,
         ?SensorType $type,
@@ -68,7 +68,7 @@ class Sensor
     {
         $this->name = $name;
         $this->macAddress = $macAddress;
-        $this->user = $user;
+        $this->user = $user ?? null;
         $this->zone = $zone ?? null;
         $this->slug = $slug ?? '';
         $this->type = $type ?? SensorType::Default;
@@ -86,7 +86,7 @@ class Sensor
         return $this->zone;
     }
 
-    public function getUser(): User
+    public function getUser(): ?User
     {
         return $this->user;
     }

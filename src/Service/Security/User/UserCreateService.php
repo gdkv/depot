@@ -28,7 +28,7 @@ class UserCreateService
         $this->passwordHasher = $passwordHasher;
     }
 
-    public function __invoke(UserDto $userDto, ): bool
+    public function __invoke(UserDto $userDto): bool
     {
         $this->errors = $this->validator->validate($userDto);
         if (count($this->errors) > 0) {

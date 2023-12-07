@@ -4,20 +4,20 @@ namespace App\Model\Dto;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class UserDto
+readonly class UserDto
 {
     public function __construct(
         #[Assert\Email]
         #[Assert\NotBlank]
         #[Assert\Type('string')]
-        private readonly string $email,
+        private string $email,
 
         #[Assert\Type('string')]
-        private readonly string $name,
+        private string $name,
 
         #[Assert\NotBlank]
         #[Assert\Type('string')]
-        private readonly string $password,
+        private string $password,
     ){}
 
     public function getEmail(): string

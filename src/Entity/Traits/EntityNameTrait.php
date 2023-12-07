@@ -17,7 +17,6 @@ trait EntityNameTrait {
 
     #[ORM\Column(type: Types::STRING, length: 255)]
     #[OA\Property(description: 'Ключевое слово')]
-    #[Assert\NotBlank]
     private ?string $slug;
 
     public function getName(): ?string
