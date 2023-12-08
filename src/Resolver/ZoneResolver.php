@@ -23,6 +23,7 @@ class ZoneResolver implements ValueResolverInterface
 
         yield new ZoneDto(
             $request->request->get('name'),
+            $request->request->get('position'),
         );
     }
 }

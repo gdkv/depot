@@ -26,9 +26,26 @@ class Zone
         ?bool $active,
         ?User $user
     ){
+        $this->update($name, $position, $active, $user);
+    }
+
+    public function update(
+        string $name,
+        ?int $position,
+        ?bool $active,
+        ?User $user
+    ): self
+    {
         $this->name = $name;
         $this->position = $position ?? 100;
         $this->active = $active ?? true;
         $this->user = $user ?? null;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
     }
 }

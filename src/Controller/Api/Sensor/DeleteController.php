@@ -5,7 +5,7 @@ namespace App\Controller\Api\Sensor;
 use App\Controller\Api\JsonResponseTrait;
 use App\Entity\Sensor\Sensor;
 use App\Security\SensorVoter;
-use App\Service\Sensor\SensorDeleteService;
+use App\Service\Sensor\ZoneDeleteService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,7 +30,7 @@ class DeleteController extends AbstractController
     )]
     #[OA\Tag(name: 'Сенсор')]
     #[Security(name: 'Bearer')]
-    public function __invoke(Sensor $sensor, SensorDeleteService $sensorDeleteService): JsonResponse
+    public function __invoke(Sensor $sensor, ZoneDeleteService $sensorDeleteService): JsonResponse
     {
         $this->denyAccessUnlessGranted(SensorVoter::DELETE, $sensor);
 

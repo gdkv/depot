@@ -12,6 +12,10 @@ readonly class ZoneDto
         #[Assert\Type('string')]
         private ?string $name,
 
+        #[Assert\NotBlank]
+        #[Assert\Type('int')]
+        #[Assert\Positive()]
+        private ?int $position,
     ){}
 
     public function getName(): ?string
@@ -19,5 +23,8 @@ readonly class ZoneDto
         return $this->name;
     }
 
-
+    public function getPosition(): ?int
+    {
+        return $this->position;
+    }
 }
