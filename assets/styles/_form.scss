@@ -1,0 +1,127 @@
+.form {
+  text-align: center;
+
+  &-header {
+    font-weight: 600;
+    font-size: 22.5px;
+    line-height: 27px;
+    color: #000000;
+    margin-bottom: 40px;
+  }
+  &-content {
+    text-align: center;
+    margin: 0 auto;
+
+    .error {
+      background-color: #333333;
+      padding: 7px;
+      border-radius: 6px;
+      margin: 0 0 10px;
+    }
+
+    form {
+      input:not([type="checkbox"]) {
+        width: 320px;
+        height: 35px;
+
+        border-radius: 20px;
+        border: medium none;
+        font-family: Gilroy;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 15px;
+        line-height: 17px;
+        color: #666666;
+
+        margin-bottom: 27px;
+        padding: 0 22px 0;
+        box-sizing: border-box;
+        z-index: 9;
+
+        &.is-invalid {
+          background: rgba(252, 92, 125, .3);
+        }
+
+        &:disabled {
+          color: #888888;
+        }
+      }
+      .form-row{
+        position: relative;
+        margin-bottom: 30px;
+
+        &.no-margin {
+          margin-bottom: 0;
+        }
+
+        .input-badge {
+          position: absolute;
+          right: 26px;
+          padding: 0 0;
+          margin: 3px;
+          width: 27px;
+          height: 27px;
+          box-sizing: border-box;
+          line-height: 27px;
+          cursor: pointer;
+
+          &.password-hide {
+            //background-image: url('/assets/images/password_hide.svg');
+            background-repeat: no-repeat;
+            background-position: center 10px;
+          }
+
+          &.password-show {
+            //background-image: url('/assets/images/password_show.svg');
+            background-repeat: no-repeat;
+            background-position: center;
+          }
+
+          &_bg {
+            right: 0;
+            background-color: #BBBBBB;
+            border-radius: 20px;
+          }
+        }
+
+        .theme-switcher {
+          margin-bottom: 20px;
+        }
+      }
+
+      button {
+        height: 35px;
+        background: #A173CA;
+        border-radius: 20px;
+        font-family: Gilroy;
+        display: block;
+        padding: 0 55px;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 15px;
+        line-height: 22px;
+        color: #FFFFFF;
+        margin: 19px auto;
+
+        &.btn-blue {
+          background: #6B81FA;
+        }
+      }
+
+      a {
+        font-size: 15px;
+        color: #FC5C7D;
+        text-decoration: none;
+        display: block;
+        margin-bottom: 10px;
+      }
+    }
+  }
+  &-aside {
+    form {
+      .form-row {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

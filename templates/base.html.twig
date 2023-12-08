@@ -2,7 +2,7 @@
 <html data-symfony-ux-translator-locale="{{ app.locale }}">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Депо. Умная система мониторинга микроклимата в любом помешении{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
@@ -12,12 +12,35 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
-    <body>
-        <div class="">
-            <img src="{{ asset('/build/images/depo.svg') }}"  alt=""/>
-        </div>
-        <h2>{{ 'main.hello' | trans }}</h2>
+    <main id="panel" class="welcome">
+        <header>
+            <div class="logo">
+                <a href="/"><img src="{{ asset('/build/images/depo.svg') }}"  alt=""/></a>
+            </div>
 
-        <div {{ vue_component('controllers/Hello', { 'name': '👋' }) }}></div>
-    </body>
+            <nav>
+                <a href="/app">App</a>
+                <a href="/buy/">Buy</a>
+                <a href="/about/">About</a>
+                <a href="/how-to/">How to</a>
+                <a href="/downloads/">Downloads</a>
+            </nav>
+        </header>
+
+        <aside>
+            <div {{ vue_component('controllers/Hello', { 'name': '👋' }) }}></div>
+        </aside>
+
+        <div class="cookie">
+            <div class="cookie-icon">
+                <img src="{{ asset('/build/images/cookie.png') }}" alt="" />
+            </div>
+            <div class="cookie-text">
+                We use cookies for your better experience. <a href="">About cookies read here</a>
+            </div>
+            <div class="cookie-close">
+                <img src="{{ asset('/build/images/cross.svg') }}" alt="" />
+            </div>
+        </div>
+    </main>
 </html>

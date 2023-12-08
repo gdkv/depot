@@ -1,0 +1,116 @@
+body {
+  &.dark {
+    background-color: #2A2A2A;
+
+    main.app {
+      background: #2A2A2A;
+
+      h1, p {
+        color: #FFFFFF;
+      }
+
+      .form-content {
+        form {
+          input:not([type="checkbox"]) {
+            background: rgba(255, 255, 255, 0.39);
+
+            &::placeholder {
+              color: #aaaaaa;
+            }
+          }
+        }
+      }
+
+      .alert {
+        p {
+          color: #dfdfdf;
+        }
+      }
+    }
+
+    .app-aside {
+      background: #000000;
+
+      a {
+        color: #FFFFFF;
+      }
+    }
+
+    .dashboard {
+      .setting-section {
+        background: #343434;
+      }
+      .last-data {
+        .data {
+          background: #343434;
+          &.active {
+            background: #434343;
+          }
+
+          &-info {
+            .name, .value {
+              color: #FFFFFF;
+            }
+          }
+        }
+      }
+      .full-chart {
+        background: #343434;
+      }
+    }
+
+    .room-block {
+      background: #676767;
+      color: #FFFFFF;
+    }
+
+    .limit-block {
+      background: #676767;
+      color: #FFFFFF;
+    }
+
+    .theme-switcher {
+      color: #dfdfdf;
+
+      .switch {
+        .slider {
+          background-color: #ccc;
+        }
+
+        input {
+          &:checked + .slider {
+            background-color: #FC5C7D;
+          }
+
+          &:focus + .slider {
+            box-shadow: 0 0 1px #FC5C7D;
+          }
+        }
+      }
+    }
+
+    .add-sensor_form {
+      background: #343434;
+    }
+
+    .welasensor-info-name {
+      color: #FDFDFD;
+    }
+
+    .sensors {
+      a {
+        background: #111111;
+
+        &.active {
+          background: #676767;
+        }
+      }
+    }
+
+    #mobile-menu {
+      &.app-mobile-menu {
+        background-color: #2A2A2A;
+      }
+    }
+  }
+}

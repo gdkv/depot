@@ -1,0 +1,60 @@
+.custom-select {
+  position: relative;
+  font-family: Gilroy;
+  font-size: 15px;
+
+  select {
+    display: none; /*hide original SELECT element: */
+  }
+
+  .select-selected {
+    background-color: #111111;
+
+    &:after {
+      position: absolute;
+      content: "";
+      top: 14px;
+      right: 10px;
+      width: 0;
+      height: 0;
+      border: 5px solid transparent;
+      border-color: #fff transparent transparent transparent;
+    }
+
+    .select-arrow-active:after {
+      border-color: transparent transparent #fff transparent;
+      top: 7px;
+    }
+  }
+
+
+  .select-items {
+    position: absolute;
+    background-color: #111111;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    border-radius: 10px;
+  }
+
+  .select-hide {
+    display: none;
+  }
+
+  .select-items div, .select-selected {
+    color: #ffffff;
+    padding: 9px 22px;
+    cursor: pointer;
+    border-radius: 10px;
+  }
+
+  .select-items div {
+    border-radius: 0;
+  }
+
+  .same-as-selected {
+    background-color: #2A2A2A;
+  }
+
+}

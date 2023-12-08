@@ -1,0 +1,141 @@
+body {
+
+  &.light {
+    background-color: #dfdfdf;
+
+    main.app {
+      background: #dfdfdf;
+
+      h1, p {
+        color: #2A2A2A;
+      }
+
+      .form-content {
+        form {
+          input:not([type="checkbox"]) {
+            background: #eeeeee;
+            color: #2A2A2A;
+
+            &::placeholder {
+              color: #777777;
+            }
+          }
+        }
+        .custom-select {
+          .select-selected {
+            background: #bbbbbb;
+            color: #2A2A2A;
+          }
+        }
+      }
+
+      .alert {
+        p {
+          color: #dfdfdf;
+        }
+      }
+    }
+
+    .app-aside {
+      background: #aaaaaa;
+
+      a:not(.btn) {
+        color:  #2A2A2A;
+      }
+
+      .quick-links a {
+        color: #FFFFFF;
+      }
+    }
+
+    .dashboard {
+      .setting-section {
+        background: #cccccc;
+      }
+      .last-data {
+        .data {
+          background: #cccccc;
+
+          &.active {
+            background: #efefef;
+          }
+
+          &-info {
+            .name, .value {
+              color: #2a2a2a;
+            }
+          }
+        }
+      }
+      .full-chart {
+        background: #eeeeee;
+      }
+    }
+
+    .room-block {
+      background: #aaaaaa;
+      color: #FFFFFF;
+    }
+
+    .limit-block {
+      background: #aaaaaa;
+      color: #FFFFFF;
+    }
+
+    .theme-switcher {
+      color: #2a2a2a;
+
+      .switch {
+        .slider {
+          background-color: #aaaaaa;
+        }
+
+        input {
+          &:checked + .slider {
+            background-color: #FC5C7D;
+          }
+
+          &:focus + .slider {
+            box-shadow: 0 0 1px #FC5C7D;
+          }
+        }
+      }
+    }
+
+    .add-sensor_form {
+      background: #ffffff;
+
+      input {
+        background: #eeeeee;
+      }
+    }
+
+    .welasensor-info-name {
+      color: #fff;
+      background-image: linear-gradient(110deg, transparent 10%, #FC5C7D 10%,#FC5C7D 90%, transparent 90%);
+
+      @media (max-width: 414px) {
+        background-image: none;
+        color: #555555;
+        text-shadow: 0 2px 30px #FC5C7D;
+      }
+    }
+
+    .sensors {
+      a {
+        background: #ffffff;
+        color: #333333;
+
+        &.active {
+          background: #eeeeee;
+        }
+      }
+    }
+
+    #mobile-menu {
+      &.app-mobile-menu {
+        background-color: #dfdfdf;
+      }
+    }
+  }
+}

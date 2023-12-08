@@ -1,0 +1,281 @@
+.sensors {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  a {
+    width: 186px;
+    height: 32px;
+    line-height: 32px;
+    margin: 0 0 15px 0;
+    border-radius: 10px;
+    font-weight: 300;
+    font-size: 13px;
+    color: #DFDFDF;
+    padding: 0 19px;
+    box-sizing: border-box;
+    position: relative;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+
+
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 13px;
+      right: 11px;
+      width: 6px;
+      height: 6px;
+      background: #6B81FA;
+      border-radius: 3px;
+    }
+    &.offline {
+      &::after {
+        background: #FC5C7D;
+      }
+    }
+
+    @media (max-width: 414px) {
+      width: 166px;
+    }
+
+    @media (max-width: 320px) {
+      width: 146px;
+    }
+  }
+}
+
+.welasensor {
+  width: 166px;
+  height: 164.57px;
+  position: relative;
+
+  .corpus {
+    position: absolute;
+    // background: 75px 0/auto 50px no-repeat url(/assets/images/LOGO_on_welasensor.png) #FDFDFD;
+    //background: 58px 71px/auto 64px no-repeat url(/assets/images/LOGO_colored.png) #FDFDFD;
+    width: 166px;
+    height: 130.94px;
+    left: 0;
+    bottom: 0;
+    border-radius: 30px;
+    box-shadow: 0 2px 10px 0 #aeaeae;
+
+  }
+
+  .badge {
+    width: 32px;
+    height: 18px;
+    border-radius: 10px;
+    // background-image: #6B81FA;
+    color: #ffffff;
+    font-size: 13px;
+    text-align: center;
+    line-height: 18px;
+    right: 10px;
+    position: absolute;
+
+    &-co2 {
+      top: 10px;
+      background-image: linear-gradient(90deg, rgba(107, 128, 250), rgba(107, 128, 250, 0.6) 100%);
+    }
+
+    &-no2 {
+      top: 30px;
+      // background-color: #A173CA;
+      background-image: linear-gradient(90deg, rgb(161, 115, 202), rgb(161, 115, 202, 0.6) 100%);
+    }
+  }
+
+  .plug {
+    position: absolute;
+    width: 72.98px;
+    height: 33.63px;
+    left: calc(50% - 36.49px);
+    top: 0;
+    background: linear-gradient(180deg, #CCCCCC 0%, #BBBBBB 100%);
+    border-radius: 5px 5px 0px 0px;
+  }
+
+  .indicator {
+    transition: background-color 2s ease .5s;
+    width: 10px;
+    height: 10px;
+    left: 20px;
+    bottom: 20px;
+    position: absolute;
+    background-color: #C4C4C4;
+    border-radius: 50%;
+  }
+
+  &:hover {
+    .indicator {
+      transition: background-color .5s ease .5s;
+      background-color: #6A82FB;
+    }
+  }
+}
+main {
+
+  &.app {
+    min-height: calc(100vh - 60px);
+    padding: 30px 30px 30px 400px;
+
+    h1 {
+      font-family: Gilroy;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 31.5px;
+      line-height: 38px;
+      color: #FFFFFF;
+    }
+
+    .form-content {
+      text-align: left;
+      form {
+        input {
+          background: #676767;
+          color: #DFDFDF;
+          border-radius: 10px;
+          margin-bottom: 10px;
+
+
+          &[name='mac'] {
+            text-transform: uppercase;
+
+            &::placeholder {
+              text-transform: none;
+            }
+          }
+        }
+        .form-row {
+          .input-badge_bg {
+            top: 2px;
+            text-align: center;
+          }
+        }
+        button {
+          width: 320px;
+          //background: #FC5C7D;
+          border-radius: 5px;
+
+          @media (max-width: 414px) {
+            width: 100%;
+          }
+        }
+        p {
+          margin-top: 5px;
+        }
+      }
+    }
+  }
+}
+
+.sensors-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  // align-items: center;
+  // flex-wrap: wrap;
+
+  @media (max-width: 414px) {
+    display: block;
+  }
+
+  .add-sensor_form {
+    width: 370px;
+    // height: 350px;
+    height: fit-content;
+    border-radius: 20px;
+    padding: 30px;
+    box-sizing: border-box;
+    margin-bottom: 40px;
+    margin-right: 65px;
+
+    @media (max-width: 414px) {
+      width: 100%;
+      padding: 10px;
+      margin-right: 0;
+    }
+
+    h1 {
+      font-family: Gilroy;
+      font-weight: 600;
+      font-size: 26px;
+      line-height: 31px;
+      color: #6A82FB;
+    }
+
+    input {
+      @media (max-width: 414px) {
+        width: 100%;
+      }
+    }
+  }
+
+  .sensors-list {
+    display: flex;
+    justify-content: flex-start;
+    // justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+    .item {
+      width: 166px;
+      margin-bottom: 40px;
+      margin-right: 65px;
+      position: relative;
+
+      &-priority {
+        //background-image: url('/assets/images/SORT.svg');
+        width: 21px;
+        height: 25px;
+        cursor: move;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 3;
+      }
+
+      .welasensor-info {
+        margin-top: 12px;
+        text-align: center;
+
+        &-mac {
+          font-weight: 300;
+          font-size: 14px;
+          line-height: 16px;
+          color: #888888;
+          text-transform: uppercase;
+        }
+        &-name {
+          font-weight: 300;
+          font-size: 16.5px;
+          line-height: 19px;
+
+          margin: 4px 0;
+
+        }
+        &-time {
+          font-weight: 300;
+          font-size: 11.5px;
+          line-height: 13px;
+          color: #888888;
+        }
+      }
+
+      @media (max-width: 414px) {
+        width: 100%;
+        display: flex;
+        margin-right: 0;
+
+        .welasensor-info {
+          margin-left: 20px;
+          text-align: left;
+        }
+      }
+    }
+
+  }
+}
