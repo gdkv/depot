@@ -22,13 +22,11 @@ class Zone
 
     public function __construct(
         string $name,
-        ?string $slug,
         ?int $position,
         ?bool $active,
         ?User $user
     ){
         $this->name = $name;
-        $this->slug = $slug ?? '';
         $this->position = $position ?? 100;
         $this->active = $active ?? true;
         $this->user = $user ?? null;

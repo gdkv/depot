@@ -37,7 +37,7 @@ class SensorCreateService
         $this->zoneRepository = $zoneRepository;
     }
 
-    public function __invoke(SensorDto $sensorDto)
+    public function __invoke(SensorDto $sensorDto): ?Sensor
     {
         $this->errors = $this->validator->validate($sensorDto);
         if (count($this->errors) > 0) {
@@ -54,7 +54,6 @@ class SensorCreateService
             $sensorDto->getName(),
             $sensorDto->getMacAddress(),
             $this->security->getUser(),
-            null,
             $zone,
             SensorType::tryFrom($sensorDto->getSensorType()),
             100,
@@ -81,7 +80,7 @@ class SensorCreateService
                 [],
                 $zoneUuid,
                 'zoneUuid',
-                $sensorDto->getZoneUuid(),
+                $zoneUuid,
                 null,
                 'zone.not.found',
                 null,

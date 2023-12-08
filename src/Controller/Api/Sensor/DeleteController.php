@@ -4,6 +4,8 @@ namespace App\Controller\Api\Sensor;
 
 use App\Controller\Api\JsonResponseTrait;
 use App\Entity\Sensor\Sensor;
+use App\Security\SensorVoter;
+use App\Service\Sensor\SensorDeleteService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,7 +22,7 @@ class DeleteController extends AbstractController
      *
      * Этот запрос вернет пустой ответ в случае успешного удаления, или error если что то пошло не так
      */
-    #[Route(path: '/api/sensor/{sensorUuid}', name: 'api.sensor.delete', methods: ['DELETE'])]
+    #[Route(path: '/api/sensor/{id}', name: 'api.sensor.delete', methods: ['DELETE'])]
     #[OA\Response(
         response: 200,
         description: '',
@@ -28,12 +30,16 @@ class DeleteController extends AbstractController
     )]
     #[OA\Tag(name: 'Сенсор')]
     #[Security(name: 'Bearer')]
-    public function __invoke(Sensor $sensor): JsonResponse
+    public function __invoke(Sensor $sensor, SensorDeleteService $sensorDeleteService): JsonResponse
     {
-        $this->denyAccessUnlessGranted('SENSOR_DELETE', $sensor);
+        $this->denyAccessUnlessGranted(SensorVoter::DELETE, $sensor);
 
-        return $this->jsonResponse(
-            $sensor
-        );
+        if (($sensorDeleteService)($sensor)) {
+            return $this->jsonResponse([
+                'success' => true,
+            ]);
+        } else {
+            return $this->jsonResponseError();
+        }
     }
 }

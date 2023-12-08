@@ -30,15 +30,15 @@ class ZoneFixtures extends Fixture implements DependentFixtureInterface
 
     private function entities(): Generator
     {
-        yield new Zone('Corridor', null, 1, true, $this->getReference('user-1'));
-        yield new Zone('Kitchen', null, 2, true, $this->getReference('user-1'));
-        yield new Zone('Bath', null, 3, true, $this->getReference('user-1'));
-        yield new Zone('Toilet', null, 4, true, $this->getReference('user-1'));
-        yield new Zone('Room 1', null, 5, true, $this->getReference('user-1'));
-        yield new Zone('Balcony', null, 6, true, $this->getReference('user-1'));
-        yield new Zone('Room 2', null, 7, true, $this->getReference('user-1'));
-        yield new Zone('Hall', null, 8, true, $this->getReference('user-1'));
-        yield new Zone('Room 3', null, 8, true, $this->getReference('user-1'));
+        yield new Zone('Corridor', 1, true, $this->getReference('user-1'));
+        yield new Zone('Kitchen', 2, true, $this->getReference('user-1'));
+        yield new Zone('Bath', 3, true, $this->getReference('user-1'));
+        yield new Zone('Toilet', 4, true, $this->getReference('user-1'));
+        yield new Zone('Room 1', 5, true, $this->getReference('user-1'));
+        yield new Zone('Balcony', 6, true, $this->getReference('user-1'));
+        yield new Zone('Room 2', 7, true, $this->getReference('user-1'));
+        yield new Zone('Hall', 8, true, $this->getReference('user-1'));
+        yield new Zone('Room 3', 8, true, $this->getReference('user-1'));
     }
 
 }

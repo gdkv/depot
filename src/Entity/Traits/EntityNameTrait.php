@@ -36,4 +36,12 @@ trait EntityNameTrait {
             ->slug($this->name)
             ->lower();
     }
+
+    #[ORM\PreUpdate]
+    public function onPreUpdate(): void
+    {
+        $this->slug = (new AsciiSlugger())
+            ->slug($this->name)
+            ->lower();
+    }
 }

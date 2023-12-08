@@ -25,6 +25,11 @@ readonly class SensorDto
         #[Assert\Type('string')]
         #[Assert\Choice(callback: [SensorType::class, 'toArray'])]
         private ?string $sensorType,
+
+        #[Assert\NotBlank]
+        #[Assert\Type('int')]
+        #[Assert\Positive()]
+        private ?int $position,
     ){}
 
     public function getName(): ?string
@@ -45,5 +50,10 @@ readonly class SensorDto
     public function getSensorType(): ?string
     {
         return $this->sensorType;
+    }
+
+    public function getPosition(): ?int
+    {
+        return $this->position;
     }
 }

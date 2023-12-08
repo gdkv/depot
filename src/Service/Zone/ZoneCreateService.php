@@ -40,7 +40,6 @@ class ZoneCreateService
         $this->zone = new Zone(
             $zoneDto->getName(),
             null,
-            null,
             true,
             $this->security->getUser(),
         );

@@ -4,6 +4,10 @@ namespace App\Controller\Api\Sensor;
 
 use App\Controller\Api\JsonResponseTrait;
 use App\Entity\Sensor\Sensor;
+use App\Exception\AppException;
+use App\Model\Dto\SensorDto;
+use App\Security\SensorVoter;
+use App\Service\Sensor\SensorEditService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,7 +24,7 @@ class EditController extends AbstractController
      *
      * Этот запрос вернет измененный сенсор пользователя или error если что то не так
      */
-    #[Route(path: '/api/sensor/{sensorUuid}', name: 'api.sensor.edit', methods: ['PUT'])]
+    #[Route(path: '/api/sensor/{id}', name: 'api.sensor.edit', methods: ['PUT'])]
     #[OA\Response(
         response: 200,
         description: '',
@@ -28,9 +32,29 @@ class EditController extends AbstractController
     )]
     #[OA\Tag(name: 'Сенсор')]
     #[Security(name: 'Bearer')]
-    public function __invoke(Sensor $sensor): JsonResponse
+    public function __invoke(
+        Sensor $sensor,
+        SensorDto $sensorDto,
+        SensorEditService $sensorEditService
+    ): JsonResponse
     {
-        $this->denyAccessUnlessGranted('SENSOR_EDIT', $sensor);
+        $this->denyAccessUnlessGranted(SensorVoter::EDIT, $sensor);
+
+        try {
+            $sensor = ($sensorEditService)($sensor, $sensorDto);
+        } catch (AppException $e) {
+            return $this->jsonResponseError(
+                $e->getErrorMessage(),
+                $e->getErrorCode(),
+                $e->getErrorData(),
+                $e->getResponseCode()
+            );
+        } catch (\Throwable $e) {
+            return $this->jsonResponseError(
+                $e->getMessage(),
+                $e->getCode(),
+            );
+        }
 
         return $this->jsonResponse(
             $sensor

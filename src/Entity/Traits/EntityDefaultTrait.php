@@ -27,4 +27,11 @@ trait EntityDefaultTrait {
     {
         return $this->active;
     }
+
+    public function deactivate(): self
+    {
+        $this->active = false;
+
+        return $this;
+    }
 }

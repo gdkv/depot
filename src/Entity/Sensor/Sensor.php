@@ -31,7 +31,7 @@ class Sensor
     #[OA\Property(title: 'MAC адрес', description: 'MAC адрес устройства', type: 'string')]
     private string $macAddress;
 
-    #[ORM\OneToOne(targetEntity: Zone::class)]
+    #[ORM\ManyToOne(targetEntity: Zone::class)]
     private Zone $zone;
 
     #[ORM\Column(type: Types::STRING, enumType: SensorType::class)]
@@ -59,21 +59,34 @@ class Sensor
         string $name,
         string $macAddress,
         ?User $user,
-        ?string $slug,
         ?Zone $zone,
         ?SensorType $type,
         ?int $position,
         ?bool $active,
     )
     {
+        $this->update($name, $macAddress, $user, $zone, $type, $position, $active);
+    }
+
+    public function update(
+        string $name,
+        string $macAddress,
+        ?User $user,
+        ?Zone $zone,
+        ?SensorType $type,
+        ?int $position,
+        ?bool $active,
+    ): self
+    {
         $this->name = $name;
         $this->macAddress = $macAddress;
         $this->user = $user ?? null;
         $this->zone = $zone ?? null;
-        $this->slug = $slug ?? '';
         $this->type = $type ?? SensorType::Default;
         $this->position = $position ?? 100;
         $this->active = $active ?? true;
+
+        return $this;
     }
 
     public function getMacAddress(): string

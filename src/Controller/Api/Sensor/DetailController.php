@@ -5,6 +5,7 @@ namespace App\Controller\Api\Sensor;
 use App\Controller\Api\JsonResponseTrait;
 use App\Entity\Sensor\Sensor;
 use App\Repository\Sensor\SensorRepository;
+use App\Security\SensorVoter;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,7 +23,7 @@ class DetailController extends AbstractController
      * Этот запрос вернет список всех активных и неактивных сенсоров пользователя, в будущем должны появиться
      * GET параметры в виде фильтров или заменить на POST и передавать их в теле запроса
      */
-    #[Route(path: '/api/sensor/{sensorUuid}', name: 'api.sensor.detail', methods: ['GET'])]
+    #[Route(path: '/api/sensor/{id}', name: 'api.sensor.detail', methods: ['GET'])]
     #[OA\Response(
         response: 200,
         description: '',
@@ -32,7 +33,7 @@ class DetailController extends AbstractController
     #[Security(name: 'Bearer')]
     public function __invoke(Sensor $sensor): JsonResponse
     {
-        $this->denyAccessUnlessGranted('SENSOR_VIEW', $sensor);
+        $this->denyAccessUnlessGranted(SensorVoter::VIEW, $sensor);
 
         return $this->jsonResponse(
             $sensor

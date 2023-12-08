@@ -34,10 +34,23 @@ class SensorFixtures extends Fixture implements DependentFixtureInterface
     {
         yield new Sensor(
             'Sensor 1', 'a0-20-a6-11-b9-f3',
-            $this->getReference('user-1'),null,
+            $this->getReference('user-1'),
             $this->getReference('zone-1'), SensorType::Default,
             null, null
         );
 
+        yield new Sensor(
+            'Sensor 2', 'bc-dd-88-ed-4d-ff',
+            $this->getReference('user-1'),
+            $this->getReference('zone-1'), SensorType::Default,
+            null, null
+        );
+
+        yield new Sensor(
+            'Sensor 3', 'dd-a3-cd-ff-56-9a',
+            $this->getReference('user-2'),
+            $this->getReference('zone-1'), SensorType::Default,
+            null, null
+        );
     }
 }

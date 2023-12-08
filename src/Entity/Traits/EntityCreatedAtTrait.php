@@ -20,7 +20,7 @@ trait EntityCreatedAtTrait {
     {
         $this->createdAt = new DateTime();
     }
-
+    
     public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->createdAt;
