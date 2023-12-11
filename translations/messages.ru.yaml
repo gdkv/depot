@@ -2,7 +2,7 @@ main:
   menu:
     app: 'Приложение'
     buy: 'Купить'
-    about: 'О нас'
+    about: 'Информация'
     how_to: 'Как использовать'
     downloads: 'Скачать'
 
@@ -14,6 +14,22 @@ main:
     index:
       header: 'Когда дом синхронизируется с вами'
       description: 'Влажность и температура играют важную роль в помещении, где вы и ваши близкие проводите большую часть своего времени. С помощью сенсоров Депо вы можете следить и устанавливать лимиты, получать отчеты и уведомления и всегда быть на чеку если показатели выходят за пределы.'
+    download:
+      header: 'Загрузки'
+      description: 'Страница с ссылками на наши самые последние релизы приложений'
+      depot_tool: 'Депо Tool'
+      depot_tool_info: 'Депо Tool это Windows приложение для первоночальной настройки вашего Депо сенсора и подключения его к вашему Wi-Fi'
+      depot_standalone: 'Депо Standalone'
+      depot_standalone_info: 'Если вы не хотие использовать наше облачное приложение и хотите использовать его в своих целях на своем VPS сервере или может быть на собственном Raspberry Pi в месте где нет интернета, для этого отправьте заявку на нашу почту и опишите в каких целях вы хотите использовать наше приложение'
+      depot_rest: 'Депо Rest'
+      depot_rest_info: 'Если вам нужен доступ к нашему API напишите нам на почту'
+    about:
+      header: 'Информация'
+      description: ''
+    buy:
+      header: 'Ready to buy new&nbsp;astonishing powerful sensors'
+      description: 'Sensors will help you see your apartment micro climate, help to correct the ideal temperature and humidity of the room and stay in touch with it'
+
 exceptions:
   user_create_exception: 'Ошибка при создании пользователя'
 

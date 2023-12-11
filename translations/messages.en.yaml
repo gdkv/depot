@@ -2,7 +2,7 @@ main:
   menu:
     app: 'App'
     buy: 'Buy'
-    about: 'About'
+    about: 'Info'
     how_to: 'How to'
     downloads: 'Download'
   cookie:
@@ -12,6 +12,18 @@ main:
     index:
       header: 'When house stay on sync with you'
       description: 'Humidity and temperature play an important role in the room where you and your loved ones spend most of your time. With the help of Welasensor you can set limits, receive reports and notifications if indicators go beyond the limits.'
+    download:
+      header: 'Downloads'
+      description: 'Get the last releases of Tools and Cloud app'
+      depot_tool: 'Depot Tool'
+      depot_tool_info: 'Depot Tool is a Windows app for setup Wi-Fi connection for your Depot sensor'
+      depot_standalone: 'Depot Standalone'
+      depot_standalone_info: 'If you do not want to use our cloud application and want to setup our own on VPS or maybe Raspberry Pi and run our app for our own, you can write to us and tell in what case you want to use our app'
+      depot_rest: 'Depot Rest'
+      depot_rest_info: 'If you want to get access to our API data you can write us a mail'
+    about:
+      header: 'Информация'
+      description: ''
 exceptions:
   user_create_exception: 'Error while user creation'
 

@@ -4,52 +4,44 @@
       <h1>{{ header }}</h1>
       <p>{{ description }}</p>
     </div>
-    <div class="right">
-
-     
-
-    </div>
+    <div class="right"></div>
   </section>
 
-  <section>
+  <section v-for="depotSection in depotSections" key="depotSection.id">
     <div class="section">
       <div class="section-title">
-        WS Tools
+        {{ depotSection.name }}
       </div>
       <div class="section-description">
-        <p>WS Tools is a Windows app for setup Wi-Fi connection for your Welasensor</p>
+        <p>{{ depotSection.info }}</p>
       </div>
     </div>
   </section>
-  <section>
-    <div class="section">
-      <div class="section-title">
-        WS Cloud app
-      </div>
-      <div class="section-description">
-        <p>If you don't want to use our cloud application and want to setup our own VPS or maybe
-          Raspberry Pi and run our app for our own, you can clone our project from Github</p>
-      </div>
-    </div>
-  </section>
-  <section>
-    <div class="section">
-      <div class="section-title">
-        WS REST API
-      </div>
-      <div class="section-description">
-        <p>If you want to get access to our API data you can write us a mail <a href="mailto:support@welasensor.ru">support@welasensor.ru</a></p>
-      </div>
-    </div>
-  </section>
+
 </template>
 
 <script setup>
+  import {
+    trans,
+    MAIN_PAGES_DOWNLOAD_HEADER,
+    MAIN_PAGES_DOWNLOAD_DESCRIPTION,
+    MAIN_PAGES_DOWNLOAD_DEPOT_TOOL,
+    MAIN_PAGES_DOWNLOAD_DEPOT_TOOL_INFO,
+    MAIN_PAGES_DOWNLOAD_DEPOT_STANDALONE,
+    MAIN_PAGES_DOWNLOAD_DEPOT_STANDALONE_INFO,
+    MAIN_PAGES_DOWNLOAD_DEPOT_REST,
+    MAIN_PAGES_DOWNLOAD_DEPOT_REST_INFO
+  } from '../../translator';
 
-  import { trans, MAIN_PAGES_INDEX_HEADER, MAIN_PAGES_INDEX_DESCRIPTION} from '../../translator';
+  const header = trans(MAIN_PAGES_DOWNLOAD_HEADER)
+  const description = trans(MAIN_PAGES_DOWNLOAD_DESCRIPTION)
 
-  const header = trans(MAIN_PAGES_INDEX_HEADER)
-  const description = trans(MAIN_PAGES_INDEX_DESCRIPTION)
+  const depotSections = [
+    { id: 'depotTool', name: trans(MAIN_PAGES_DOWNLOAD_DEPOT_TOOL), info: trans(MAIN_PAGES_DOWNLOAD_DEPOT_TOOL_INFO) },
+    { id: 'depotStandalone', name: trans(MAIN_PAGES_DOWNLOAD_DEPOT_STANDALONE), info: trans(MAIN_PAGES_DOWNLOAD_DEPOT_STANDALONE_INFO) },
+    { id: 'depotRest', name: trans(MAIN_PAGES_DOWNLOAD_DEPOT_REST), info: trans(MAIN_PAGES_DOWNLOAD_DEPOT_REST_INFO) },
+  ];
+
 </script>
 
 <style lang="scss"></style>
