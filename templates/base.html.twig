@@ -15,20 +15,21 @@
     <main id="panel" class="welcome">
         <header>
             <div class="logo">
-                <a href="/"><img src="{{ asset('/build/images/depo.svg') }}"  alt=""/></a>
+                <a href="{{ path('app.index') }}"><img src="{{ asset('/build/images/depo.svg') }}"  alt=""/></a>
             </div>
 
             <nav>
-                <a href="/app">App</a>
-                <a href="/buy/">Buy</a>
-                <a href="/about/">About</a>
-                <a href="/how-to/">How to</a>
-                <a href="/downloads/">Downloads</a>
+                <a href="{{ path('app.app') }}">{{ 'main.menu.app' | trans }}</a>
+                <a href="{{ path('app.buy') }}">{{ 'main.menu.buy' | trans }}</a>
+                <a href="{{ path('app.about') }}">{{ 'main.menu.about' | trans }}</a>
+                <a href="{{ path('app.download') }}">{{ 'main.menu.downloads' | trans }}</a>
             </nav>
         </header>
 
+        {% block content %}{% endblock %}
+
         <aside>
-            <div {{ vue_component('controllers/Hello', { 'name': '👋' }) }}></div>
+            <div {# vue_component('controllers/Hello', { 'name': '👋' }) #}></div>
         </aside>
 
         <div class="cookie">
@@ -36,7 +37,7 @@
                 <img src="{{ asset('/build/images/cookie.png') }}" alt="" />
             </div>
             <div class="cookie-text">
-                We use cookies for your better experience. <a href="">About cookies read here</a>
+                {{ 'main.cookie.info' | trans }} <a href="">{{ 'main.cookie.link' | trans }}</a>
             </div>
             <div class="cookie-close">
                 <img src="{{ asset('/build/images/cross.svg') }}" alt="" />

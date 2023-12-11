@@ -16,6 +16,6 @@ class DefaultController extends AbstractController
     )]
     public function __invoke(): Response
     {
-        return $this->render('base.html.twig', []);
+        return $this->render('pages/index.html.twig', []);
     }
 }

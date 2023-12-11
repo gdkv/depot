@@ -277,16 +277,16 @@ main {
 
   .cookie {
     position: fixed;
-    width: 600px;
-    height: 38px;
-    left: calc(50% - 300px);
+    width: 410px;
+    height: 105px;
+    left: 20px;
     bottom: 20px;
-    background-color: rgba(223,223,223,.6);
+    background-color: rgba(223, 223, 223, 0.6);
     backdrop-filter: blur(20px);
     border-radius: 20px;
-    display: flex;
+    /* display: flex; */
     justify-content: space-between;
-    line-height: 38px;
+    line-height: 25px;
     padding: 0 18px;
     box-sizing: border-box;
     visibility: visible;
@@ -311,6 +311,10 @@ main {
     }
     &-close {
       cursor: pointer;
+      position: fixed;
+      top: 5px;
+      right: 15px;
+
       img {
         margin: 8px 0 0;
       }

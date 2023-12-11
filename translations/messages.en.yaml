@@ -1,5 +1,23 @@
 main:
-  hello: 'Hello!!🤫❌🤖'
-  vue_hello: 'Hello vue!'
+  menu:
+    app: 'App'
+    buy: 'Buy'
+    about: 'About'
+    how_to: 'How to'
+    downloads: 'Download'
+  cookie:
+    info: 'We use cookies for your better experience'
+    link: 'About cookies read here'
+  pages:
+    index:
+      header: 'When house stay on sync with you'
+      description: 'Humidity and temperature play an important role in the room where you and your loved ones spend most of your time. With the help of Welasensor you can set limits, receive reports and notifications if indicators go beyond the limits.'
+exceptions:
+  user_create_exception: 'Error while user creation'
 
-user_create_exception: 'ТЕСТ EN'
+sensor:
+  type:
+    default: 'Default'
+    electric: 'Electric'
+    aqua: 'Aqua'
+    motion: 'Motion'

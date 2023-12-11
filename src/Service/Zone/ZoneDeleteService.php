@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\Sensor;
+namespace App\Service\Zone;
 
 use App\Entity\Sensor\Sensor;
 use App\Entity\Sensor\Zone;
