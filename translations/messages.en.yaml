@@ -24,6 +24,14 @@ main:
     about:
       header: 'Информация'
       description: ''
+
+  form:
+    login:
+      header: 'Login to account'
+      email: 'Email'
+      password: 'Password'
+      submit: 'Sign in'
+
 exceptions:
   user_create_exception: 'Error while user creation'
 

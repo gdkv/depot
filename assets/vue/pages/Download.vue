@@ -1,8 +1,8 @@
 <template>
   <section class="top">
     <div class="left">
-      <h1>{{ header }}</h1>
-      <p>{{ description }}</p>
+      <h1 v-text="header" />
+      <p v-text="description" />
     </div>
     <div class="right"></div>
   </section>

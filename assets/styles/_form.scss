@@ -19,14 +19,14 @@
       margin: 0 0 10px;
     }
 
-    form {
+    .form-inner {
       input:not([type="checkbox"]) {
         width: 320px;
         height: 35px;
 
         border-radius: 20px;
         border: medium none;
-        font-family: Gilroy;
+        font-family: 'Gilroy', sans-serif;
         font-style: normal;
         font-weight: 300;
         font-size: 15px;
@@ -66,13 +66,13 @@
           cursor: pointer;
 
           &.password-hide {
-            //background-image: url('/assets/images/password_hide.svg');
+            background-image: url('/assets/images/password_hide.svg');
             background-repeat: no-repeat;
             background-position: center 10px;
           }
 
           &.password-show {
-            //background-image: url('/assets/images/password_show.svg');
+            background-image: url('/assets/images/password_show.svg');
             background-repeat: no-repeat;
             background-position: center;
           }
@@ -93,7 +93,7 @@
         height: 35px;
         background: #A173CA;
         border-radius: 20px;
-        font-family: Gilroy;
+        font-family: 'Gilroy', sans-serif;
         display: block;
         padding: 0 55px;
         font-style: normal;
@@ -118,7 +118,7 @@
     }
   }
   &-aside {
-    form {
+    .form-inner {
       .form-row {
         margin-bottom: 0;
       }

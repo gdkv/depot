@@ -29,7 +29,7 @@
         {% block content %}{% endblock %}
 
         <aside>
-            <div {# vue_component('controllers/Hello', { 'name': '👋' }) #}></div>
+            <div {{ vue_component('components/auth/Login') }}></div>
         </aside>
 
         <div class="cookie">

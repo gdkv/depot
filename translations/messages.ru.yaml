@@ -30,6 +30,13 @@ main:
       header: 'Ready to buy new&nbsp;astonishing powerful sensors'
       description: 'Sensors will help you see your apartment micro climate, help to correct the ideal temperature and humidity of the room and stay in touch with it'
 
+  form:
+    login:
+      header: 'Войти в аккаунт'
+      email: 'Почта'
+      password: 'Пароль'
+      submit: 'Войти'
+
 exceptions:
   user_create_exception: 'Ошибка при создании пользователя'
 

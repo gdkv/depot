@@ -1,24 +1,20 @@
 <template>
-    <section class="top">
-      <div class="left">
-        <h1>{{ header }}</h1>
-        <p>{{ description }}</p>
-      </div>
-      <div class="right">
-
-      </div>
-    </section>
+  <section class="top">
+    <div class="left">
+      <h1 v-text="header" />
+      <p v-text="description" />
+    </div>
+    <div class="right"></div>
+  </section>
 
   <section class="accordion">
     <div class="questions">
-
       <div class="question" v-for="question in questions" key="question.id">
         <a href="#" class="toogle question-title">{{ question.question }}</a>
         <div class="toogle-block answer active" id="{{ question.id }}">
           <p>{{ question.answer }}</p>
         </div>
       </div>
-
     </div>
   </section>
 </template>
