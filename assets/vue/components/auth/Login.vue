@@ -34,7 +34,7 @@
   const loginSubmit = () => {
     auth('test@test.com', '1111')
         .then(() => {
-          console.log(token);
+          console.log(token.value.token);
         });
   };
 

@@ -3,6 +3,14 @@ export const ApiRoutes= {
         login: {
             url: '/api/auth',
             method: 'POST'
-        }
+        },
+        register: {
+            url: '/api/registration',
+            method: 'POST'
+        },
+        user: {
+            url: '/api/user',
+            method: 'POST'
+        }   
     }
 }
