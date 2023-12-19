@@ -1,4 +1,4 @@
-export const ApiRoutes= {
+export const ApiRoutes = {
     auth: {
         login: {
             url: '/api/auth',

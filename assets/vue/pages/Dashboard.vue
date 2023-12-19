@@ -11,7 +11,13 @@
 </template>
 
 <script setup>
+  import {onMounted} from "vue";
+  import useCurrentUser from "../store/user";
 
+  onMounted(() => {
+    console.log('NEED AUTH CHECK');
+    // if ()
+  });
 
 </script>
 

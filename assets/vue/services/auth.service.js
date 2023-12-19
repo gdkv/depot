@@ -13,14 +13,14 @@ class AuthService {
                 password: password
             })
         })
-            .then(response => response.json())
-            .then((token) => {
-                if (token.token) {
-                    localStorage.setItem('userToken', JSON.stringify(token.token));
-                }
+        .then(response => response.json())
+        .then((token) => {
+            if (token.token) {
+                localStorage.setItem('userToken', JSON.stringify(token.token));
+            }
 
-                return token;
-            });
+            return token;
+        });
     }
 
     register(user) {
