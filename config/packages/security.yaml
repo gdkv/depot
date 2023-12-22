@@ -23,9 +23,9 @@ security:
             pattern: ^/api
             stateless: true
             jwt: ~
-        app:
-            pattern: ^/(en|ru)/app
-            lazy: true
+#        app:
+#            pattern: ^/(en|ru)/app
+#            lazy: true
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
@@ -43,7 +43,7 @@ security:
     access_control:
         - { path: ^/api/(auth|registration|doc), roles: PUBLIC_ACCESS }
         - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
-        - { path: ^/(en|ru)/app, roles: ROLE_USER }
+#        - { path: ^/(en|ru)/app, roles: ROLE_USER }
 
 when@test:
     security:

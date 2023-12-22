@@ -38,8 +38,6 @@ class ApiKeyAuthenticator extends AbstractAuthenticator
         // e.g. by looking up a user in the database using its API key
         // $userIdentifier = /** ... */;
 
-        $userIdentifier = 'test@test.com';
-
         // return new Passport(new UserBadge($userIdentifier), []);
     }
 
