@@ -12,5 +12,22 @@ export const ApiRoutes = {
             url: '/api/user',
             method: 'POST'
         }   
+    },
+
+    sensor: {
+        add: {
+            url: '/api/sensor',
+            method: 'POST'
+        },
+        list: {
+            url: '/api/sensor',
+            method: 'GET'
+        },
+        edit: {
+            url: '/api/sensor/{sensorId}',
+            method: 'PUT'
+        },
+        delete: {},
+        get: {}
     }
 }

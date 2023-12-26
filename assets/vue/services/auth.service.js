@@ -1,7 +1,13 @@
 import {ApiRoutes as routes} from "../helpers/apiRoutes";
+import useCurrentUser from "../store/user";
 
 class AuthService {
+    constructor() {
+        this.token = localStorage.getItem('userToken');
+    }
+
     login(email, password){
+
         return fetch(routes.auth.login.url, {
             method: routes.auth.login.method,
             headers: {
@@ -16,11 +22,32 @@ class AuthService {
         .then(response => response.json())
         .then((token) => {
             if (token.token) {
-                localStorage.setItem('userToken', JSON.stringify(token.token));
+                localStorage.setItem('userToken', token.token);
             }
 
             return token;
         });
+    }
+
+    user(){
+        const {currentUser} = useCurrentUser();
+
+        if (currentUser.id) {
+            return currentUser;
+        }
+
+        return fetch(routes.auth.user.url, {
+            method: routes.auth.user.method,
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${this.token}`
+            }
+        })
+            .then(response => response.json())
+            .then((user) => {
+                return user.response;
+            });
     }
 
     register(user) {

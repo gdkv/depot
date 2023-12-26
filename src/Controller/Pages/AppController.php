@@ -16,6 +16,6 @@ class AppController extends AbstractController
     )]
     public function __invoke(): Response
     {
-        return $this->render('pages/app.html.twig', []);
+        return $this->render('app/index.html.twig', []);
     }
 }

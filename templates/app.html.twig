@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html data-symfony-ux-translator-locale="{{ app.locale }}">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Депо. Умная система мониторинга микроклимата в любом помешении{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </head>
+    <body class="dark">
+        <main id="panel" class="app">
+            <aside class="app-aside">
+                <div class="top">
+                    <div class="logo">
+                        <a href="{{ path('app.app') }}">
+                            <img src="{{ asset('/build/images/depo.svg') }}"  alt=""/>
+                        </a>
+                    </div>
+                    <div class="plan">Ultimate plan</div>
+                </div>
+                <div>
+
+                    <div class="quick-links">
+                        <a href="{{ path('app.app') }}">Add sensor</a>
+                        <a href="{{ path('app.app') }}">Add room</a>
+                    </div>
+                    <div class="main">
+                        <a href="{{ path('app.app') }}">Sensors</a>
+                        <a href="{{ path('app.app') }}">Rooms</a>
+                        <a href="{{ path('app.app') }}">Settings</a>
+                        <a href="{{ path('app.app') }}">Reports</a>
+                        <a href="{{ path('app.app') }}">Notify</a>
+                    </div>
+
+                    <div class="logout">
+                        <a href="{{ path('app.app') }}" class="btn btn-red">Logout</a>
+                    </div>
+
+                </div>
+            </aside>
+            <section class="content">
+                <div class="mobile-header">
+                    <div class="logo">
+                        <a href="{{ path('app.app') }}">
+                            <img src="{{ asset('/build/images/depo.svg') }}"  alt=""/>
+                        </a>
+                    </div>
+                    <div class="mobile-nav toggle-button">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+
+                {% block content %}{% endblock %}
+            </section>
+
+        </main>
+    </body>
+</html>

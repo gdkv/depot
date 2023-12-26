@@ -32,16 +32,6 @@
             <div {{ vue_component('components/auth/Login') }}></div>
         </aside>
 
-        <div class="cookie">
-            <div class="cookie-icon">
-                <img src="{{ asset('/build/images/cookie.png') }}" alt="" />
-            </div>
-            <div class="cookie-text">
-                {{ 'main.cookie.info' | trans }} <a href="">{{ 'main.cookie.link' | trans }}</a>
-            </div>
-            <div class="cookie-close">
-                <img src="{{ asset('/build/images/cross.svg') }}" alt="" />
-            </div>
-        </div>
+        <div {{ vue_component('components/UI/cookie') }}></div>
     </main>
 </html>
