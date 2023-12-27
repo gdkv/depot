@@ -40,20 +40,7 @@ body {
       .setting-section {
         background: #343434;
       }
-      .last-data {
-        .data {
-          background: #343434;
-          &.active {
-            background: #434343;
-          }
 
-          &-info {
-            .name, .value {
-              color: #FFFFFF;
-            }
-          }
-        }
-      }
       .full-chart {
         background: #343434;
       }
@@ -95,16 +82,6 @@ body {
 
     .welasensor-info-name {
       color: #FDFDFD;
-    }
-
-    .sensors {
-      a {
-        background: #111111;
-
-        &.active {
-          background: #676767;
-        }
-      }
     }
 
     #mobile-menu {

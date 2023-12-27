@@ -1,6 +1,6 @@
 .dashboard {
   h1 {
-    font-family: Gilroy;
+    font-family: 'Gilroy', sans-serif;
     font-style: normal;
     font-weight: bold;
     font-size: 31.5px;
@@ -21,79 +21,6 @@
     }
   }
 
-  .last-data {
-    display: flex;
-    justify-content: space-between;
-    margin: 55px 0;
-    position: relative;
-
-    .data {
-      min-width: 224px;
-      height: 200px;
-      border-radius: 20px;
-      margin-right: 100px;
-      box-sizing: border-box;
-      position: relative;
-      overflow: hidden;
-
-      &-graph {
-        position: absolute;
-        z-index: 1;
-        width: 100%;
-        //background: url('/assets/images/Rectangle 17.png');
-        top: -10px;
-        left: -15px;
-      }
-
-      &-info {
-        z-index: 12;
-        padding: 17px;
-        box-sizing: border-box;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: relative;
-
-        .name {
-          font-weight: 300;
-          font-size: 16.5px;
-          line-height: 19px;
-          position: relative;
-
-          sub {
-            position: absolute;
-            bottom: -4px;
-            font-size: 12px;
-          }
-        }
-        .value {
-          font-weight: 600;
-          font-size: 27.5px;
-          line-height: 33px;
-          color: #FFFFFF;
-        }
-      }
-
-      .is-limit {
-        text-align: right;
-        width: 100%;
-        font-style: italic;
-        font-weight: 300;
-        font-size: 16.5px;
-        line-height: 19px;
-        color: #FFFFFF;
-        box-sizing: border-box;
-        padding: 17px;
-        z-index: 12;
-        position: relative;
-        height: 130px;
-      }
-
-      @media (max-width: 414px) {
-        margin-right: 20px;
-      }
-    }
-  }
 
   .setting-line {
     display: flex;
@@ -304,8 +231,6 @@
     height: 0;
 
     &:checked + .slider:before {
-      -webkit-transform: translateX(14px);
-      -ms-transform: translateX(14px);
       transform: translateX(14px);
     }
   }

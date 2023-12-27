@@ -6,8 +6,8 @@ import {onMounted, ref} from "vue";
     MAIN_COOKIE_LINK
   } from '../../../translator';
 
-  const cookieInfo = trans(MAIN_COOKIE_INFO)
-  const cookieLink = trans(MAIN_COOKIE_LINK)
+  const cookieInfo = trans(MAIN_COOKIE_INFO);
+  const cookieLink = trans(MAIN_COOKIE_LINK);
   const isView = ref(true);
 
   const cookieHide = () => {

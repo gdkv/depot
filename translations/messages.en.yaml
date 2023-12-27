@@ -41,3 +41,11 @@ sensor:
     electric: 'Electric'
     aqua: 'Aqua'
     motion: 'Motion'
+
+measurements:
+  temperature: 'Temperature'
+  humidity: 'Humidity'
+  lux: 'Lux'
+  noise: 'Noise'
+  pressure: 'Pressure'
+  co2: 'CO<sub>2</sub>'

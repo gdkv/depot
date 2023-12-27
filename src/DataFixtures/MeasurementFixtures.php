@@ -41,6 +41,24 @@ class MeasurementFixtures extends Fixture implements DependentFixtureInterface
             );
         }
 
+        for ($i = 0; $i < 100; $i++) {
+            yield new Measurement(
+                $this->generateHumidity(), $this->generatePressure(),
+                $this->generateCO2(), $this->generateTemperature(),
+                $this->generateLux(), $this->generateDecibel(),
+                $this->getReference('sensor-2')
+            );
+        }
+
+        for ($i = 0; $i < 100; $i++) {
+            yield new Measurement(
+                $this->generateHumidity(), $this->generatePressure(),
+                $this->generateCO2(), $this->generateTemperature(),
+                $this->generateLux(), $this->generateDecibel(),
+                $this->getReference('sensor-3')
+            );
+        }
+
     }
 
     private function generateHumidity(): float

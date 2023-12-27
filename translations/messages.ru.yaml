@@ -46,3 +46,11 @@ sensor:
     electric: 'Электричество'
     aqua: 'Водный'
     motion: 'Движение'
+
+measurements:
+  temperature: 'Температура'
+  humidity: 'Влажность'
+  lux: 'Освещеность'
+  noise: 'Шум'
+  pressure: 'Давление'
+  co2: 'CO<sub>2</sub>'
