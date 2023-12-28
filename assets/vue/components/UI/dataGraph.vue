@@ -1,18 +1,29 @@
 <template>
-  <div :class="$style.data_graph" v-html="svgImage" />
+  <div :class="{
+    'data_graph': true,
+    'loaded': isLoaded
+  }" v-html="svgImage" />
 </template>
-<style lang="scss" module>
+<style lang="scss">
   .data_graph {
+    transform: scale(0);
+    transition: all .5s;
+    position: absolute;
+
+    &.loaded {
+      transform: scale(1);
+    }
+
     svg {
       width: 250px;
       height: 200px;
     }
   }
-
 </style>
 <script setup>
   import {onMounted, ref} from "vue";
 
+  const isLoaded = ref(false);
   const svgImage = ref('');
   const props = defineProps({
     measure: Array,
@@ -85,7 +96,11 @@
         }
       })
     })
-        .then(async (res) => svgImage.value = await res.text())
+        .then(async (res) => {
+          svgImage.value = await res.text();
+          isLoaded.value = true;
+          console.log(isLoaded.value);
+        })
         .catch(console.error.bind(console));
   });
 </script>

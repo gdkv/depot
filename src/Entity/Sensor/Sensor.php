@@ -6,9 +6,11 @@ use App\Entity\Security\User;
 use App\Entity\Traits\EntityDefaultTrait;
 use App\Entity\Traits\EntityIdTrait;
 use App\Entity\Traits\EntityNameTrait;
+use App\Model\Enum\SensorStatus;
 use App\Model\Enum\SensorType;
 use App\Repository\Sensor\SensorRepository;
 use App\Validator\ConstraintsMacAddress;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\PersistentCollection;
@@ -44,7 +46,7 @@ class Sensor
     private SensorType $type;
 
     #[ORM\OneToMany(mappedBy: 'sensor', targetEntity: Measurement::class)]
-    #[ORM\OrderBy(['createdAt' => 'ASC'])]
+    #[ORM\OrderBy(['createdAt' => Criteria::ASC])]
     #[OA\Property(
         description: 'Измерения',
         type: 'array',
@@ -112,5 +114,14 @@ class Sensor
     public function getMeasurement(): PersistentCollection
     {
         return $this->measurement;
+    }
+
+    public function getStatus(): SensorStatus
+    {
+        /**
+         * @todo брать последнюю запись данных и проверять ее дату, если старее 5 минут то сенсор оффлайн
+         */
+
+        return SensorStatus::Online;
     }
 }
