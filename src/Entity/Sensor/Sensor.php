@@ -116,12 +116,37 @@ class Sensor
         return $this->measurement;
     }
 
-    public function getStatus(): SensorStatus
+    public function getOffsetMeasurement(): array
     {
-        /**
-         * @todo брать последнюю запись данных и проверять ее дату, если старее 5 минут то сенсор оффлайн
-         */
+        $offsetData = $this->measurement->slice(-20, 20);
+        return [
+            'temperature' => array_column($offsetData, 'temperature'),
+            'humidity' => array_column($offsetData, 'humidity'),
+            'pressure' => array_column($offsetData, 'pressure'),
+            'decibel' => array_column($offsetData, 'decibel'),
+        ];
+    }
 
-        return SensorStatus::Online;
+    public function getLastMeasurement(): Measurement
+    {
+        return $this->measurement->last();
+    }
+
+    public function getStatus(): array
+    {
+        if (
+            $this->getLastMeasurement()->getCreatedAt() >
+            (new \DateTime())->sub(new \DateInterval("PT5M"))
+        ) {
+            return [
+              'value' => true,
+              'text' => SensorStatus::Online,
+            ];
+        }
+
+        return [
+            'value' => false,
+            'text' => SensorStatus::Offline,
+        ];
     }
 }

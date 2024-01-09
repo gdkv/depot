@@ -1,7 +1,7 @@
 <template>
   <section class="dashboard">
     <div class="info-line">
-      Последние данные: 10.01.2024 10:01:22
+      Последние данные: {{ selectedSensor.lastMeasurement.createdAt }}
     </div>
 
     <div :class="$style.last_data" data-slideout-ignore>
@@ -45,8 +45,8 @@ import {
   MEASUREMENTS_CO2
 } from '../../../../translator';
 
-const {sensors, fetchAll} = useSensor();
-const selectedSensor = ref(null);
+const {sensors, selectedSensor, fetchAll} = useSensor();
+// const selectedSensor = ref(null);
 const measurements = ref([
   {
     name: trans(MEASUREMENTS_TEMPERATURE),
@@ -88,6 +88,7 @@ const measurements = ref([
 
 onMounted(async () => {
   await fetchAll();
+  console.log(selectedSensor.value.lastMeasurement.createdAtArray);
 });
 
 const selectMeasurement = () => {

@@ -1,17 +1,22 @@
 <template>
     <nav :class="$style.sensors">
-      <div class="online active" v-for="sensor in sensors" key="sensor.id" v-text="sensor.name" />
+      <div :class="{
+        [$style.online]: sensor.status.value,
+        [$style.active]: selectedSensorId === sensor.id
+      }" v-for="sensor in sensors" key="sensor.id" v-text="sensor.name" />
     </nav>
 </template>
 
 <script setup>
-import {onMounted} from "vue";
+import {onMounted, ref} from "vue";
 import useSensor from "../../../store/sensor";
 
-const {sensors, fetchAll} = useSensor();
+const {sensors, selectedSensor, fetchAll} = useSensor();
+const selectedSensorId = ref(null);
 
 onMounted(async () => {
   await fetchAll();
+  selectedSensorId.value = selectedSensor.id;
 });
 </script>
 
@@ -47,13 +52,14 @@ onMounted(async () => {
       right: 11px;
       width: 6px;
       height: 6px;
-      background: #6B81FA;
+      background-color: #FC5C7D;
+
       border-radius: 3px;
     }
 
-    &.offline {
+    &.online {
       &::after {
-        background-color: #FC5C7D;
+        background: #6B81FA;
       }
     }
 

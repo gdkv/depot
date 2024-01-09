@@ -49,3 +49,36 @@ measurements:
   noise: 'Noise'
   pressure: 'Pressure'
   co2: 'CO<sub>2</sub>'
+
+time_ago:
+  years: >-
+    {count, plural,
+      =1    {one year ago}
+      other {# years ago}
+    }
+  months: >-
+    {count, plural,
+      =1    {one month ago}
+      other {# months ago}
+    }
+  days: >-
+    {count, plural,
+      =1    {one day ago}
+      other {# day ago}
+    }
+  hours: >-
+    {count, plural,
+      =1    {one hour ago}
+      other {# hours ago}
+    }
+  minutes: >-
+    {count, plural,
+      =1    {one minute ago}
+      other {# minutes ago}
+    }
+  seconds: >-
+    {count, plural,
+      =0    {just now}
+      =1    {one minute ago}
+      other {# minutes ago}
+    }

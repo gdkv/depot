@@ -15,10 +15,10 @@ class MeasurementFixtures extends Fixture implements DependentFixtureInterface
     {
         $i = 0;
         foreach ($this->entities() as $entity) {
-            $i++;
             $this->setReference("measurement-{$i}", $entity);
             $manager->persist($entity);
             $entity->setCreatedAtToPast($i*5);
+            $i++;
         }
         $manager->flush();
     }

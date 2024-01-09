@@ -2,6 +2,7 @@
 
 namespace App\Entity\Traits;
 
+use App\Service\Helpers\TimeAgoHelper;
 use DateTime;
 use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
@@ -25,6 +26,13 @@ trait EntityCreatedAtTrait {
     {
         return $this->createdAt;
     }
+
+    public function getCreatedAtArray(): array
+    {
+
+        return (new TimeAgoHelper)($this->createdAt);
+    }
+
 
     #[Ignore]
     public function setCreatedAtToPast($minusMinutes): self
