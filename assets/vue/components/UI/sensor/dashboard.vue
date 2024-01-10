@@ -5,44 +5,34 @@
     </div>
 
     <div :class="$style.last_data" data-slideout-ignore>
-
-      <div @click="selectMeasurement" :class="$style.data" v-for="measurement in measurements">
+      <div @click="selectMeasurement(type)" :class="{
+        [$style.data]: true,
+        [$style.active]: selectedMeasurementType === type
+      }" v-for="(measurement, type) in measurements">
         <data-graph :measure="measurement.measures" :color="measurement.color" />
-
         <div :class="$style.is_limit" v-text="measurement.isLimit ? 'lim' : ''"/>
-
         <div :class="$style.data_info">
           <div :class="$style.name" v-html="measurement.name" />
           <div :class="$style.value" v-text="measurement.measures[measurement.measures.length - 1]" />
         </div>
-
       </div>
-
     </div>
 
-    <h1>test</h1>
-
-    <section class="full-chart" data-slideout-ignore>
-      <canvas
-          id="myChart"
-          data-measures-file=""
-          data-measure-color=""></canvas>
-    </section>
+    <full-graph :selected-type="selectedMeasurementType" />
   </section>
 </template>
 
 <script setup>
 import {onMounted, ref, watch} from "vue";
+
 import useSensor from "../../../store/sensor";
+import useMeasurement from "../../../store/measurement";
+
 import DataGraph from "../dataGraph.vue";
+import FullGraph from "../fullGraph.vue";
+
 import {
   trans,
-  MEASUREMENTS_TEMPERATURE,
-  MEASUREMENTS_HUMIDITY,
-  MEASUREMENTS_LUX,
-  MEASUREMENTS_NOISE,
-  MEASUREMENTS_PRESSURE,
-  MEASUREMENTS_CO2,
   TIME_AGO_HOURS,
   TIME_AGO_MINUTES,
   TIME_AGO_DAYS,
@@ -51,46 +41,11 @@ import {
   TIME_AGO_SECONDS
 } from '../../../../translator';
 
+
 const {sensors, selectedSensor, fetchAll} = useSensor();
-const measurements = ref({
-  temperature: {
-    name: trans(MEASUREMENTS_TEMPERATURE),
-    measures: [],
-    color: 'rgba(252, 92, 125, 1)',
-    isLimit: true
-  },
-  humidity: {
-    name: trans(MEASUREMENTS_HUMIDITY),
-    measures: [],
-    color: 'rgba(255, 188, 66, 1)',
-    isLimit: false
-  },
-  lux: {
-    name: trans(MEASUREMENTS_LUX),
-    measures: [],
-    color: 'rgba(48, 169, 222, 1)',
-    isLimit: false
-  },
-  decibel: {
-    name: trans(MEASUREMENTS_NOISE),
-    measures: [],
-    color: 'rgba(108, 73, 184, 1)',
-    isLimit: true
-  },
-  pressure: {
-    name: trans(MEASUREMENTS_PRESSURE),
-    measures: [],
-    color: 'rgba(103, 213, 181, 1)',
-    isLimit: false
-  },
-  co2: {
-    name: trans(MEASUREMENTS_CO2),
-    measures: [10, 800, 1100, NaN, NaN, 10, 18, 299, 380, 700, 800, 1110, 10, 12, NaN, 499],
-    color: 'rgb(11,199,77)',
-    isLimit: false
-  }
-});
+const {measurements} = useMeasurement();
 const lastMeasurement = ref("");
+const selectedMeasurementType = ref("temperature");
 
 onMounted( async () => {
   await fetchAll();
@@ -106,8 +61,9 @@ watch(selectedSensor, (current) => {
   measurements.value.pressure.measures = selectedSensor.value.offsetMeasurement.pressure;
 });
 
-const selectMeasurement = () => {
-  console.log('asd');
+const selectMeasurement = (measurementType) => {
+  selectedMeasurementType.value = measurementType;
+  console.log(measurementType);
 }
 
 const getLastMeasurementsMessage = () => {
@@ -135,7 +91,6 @@ const getLastMeasurementsMessage = () => {
 </script>
 
 <style lang="scss" module>
-
  .last_data {
    display: flex;
    justify-content: space-between;

@@ -44,12 +44,13 @@
     },
     responsive: true
   });
+
   const chartData = ref({
     labels: [],
     datasets: [ { data: [] } ]
   });
 
-  onUpdated(async () => {
+  onUpdated( () => {
     if (props.measure.length > 10) {
 
       chartData.value = {
