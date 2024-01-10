@@ -7,6 +7,13 @@ const state = reactive({
     selectedSensor: {
         id: null,
         name: null,
+        offsetMeasurement: {
+            temperature: [],
+            humidity: [],
+            pressure: [],
+            decibel: [],
+            lux: []
+        },
         lastMeasurement: {
             id: null,
             createdAt: '00.00.0000 00:00:00',
@@ -25,9 +32,14 @@ export default function useSensor() {
         state.selectedSensor = state.sensors[0];
     }
 
+    const changeSensor = (sensor) => {
+        state.selectedSensor = sensor;
+    }
+
     return {
         ...toRefs(state),
-        fetchAll
+        fetchAll,
+        changeSensor
     }
 }
 

@@ -1,9 +1,14 @@
 <template>
     <nav :class="$style.sensors">
-      <div :class="{
-        [$style.online]: sensor.status.value,
-        [$style.active]: selectedSensorId === sensor.id
-      }" v-for="sensor in sensors" key="sensor.id" v-text="sensor.name" />
+      <div
+          @click="selectSensor(sensor)"
+          :class="{
+            [$style.online]: sensor.status.value,
+            [$style.active]: selectedSensor.id === sensor.id
+          }"
+          v-for="sensor in sensors"
+          :key="sensor.id"
+          v-text="sensor.name" />
     </nav>
 </template>
 
@@ -11,13 +16,17 @@
 import {onMounted, ref} from "vue";
 import useSensor from "../../../store/sensor";
 
-const {sensors, selectedSensor, fetchAll} = useSensor();
-const selectedSensorId = ref(null);
+const {sensors, selectedSensor, fetchAll, changeSensor} = useSensor();
+// const selectedSensorId = ref(null);
 
 onMounted(async () => {
   await fetchAll();
-  selectedSensorId.value = selectedSensor.id;
+  // selectedSensorId.value = selectedSensor.id;
 });
+
+const selectSensor = (sensor) => {
+  changeSensor(sensor);
+}
 </script>
 
 <style lang="scss" module>
@@ -42,7 +51,7 @@ onMounted(async () => {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-
+    cursor: pointer;
 
     &::after {
       content: '';
@@ -65,6 +74,7 @@ onMounted(async () => {
 
     &.active {
       background-color: #676767;
+      cursor: default;
     }
 
     @media (max-width: 414px) {

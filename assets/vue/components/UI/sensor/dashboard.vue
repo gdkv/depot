@@ -32,7 +32,7 @@
 </template>
 
 <script setup>
-import {onMounted, ref} from "vue";
+import {onMounted, ref, watch} from "vue";
 import useSensor from "../../../store/sensor";
 import DataGraph from "../dataGraph.vue";
 import {
@@ -52,76 +52,84 @@ import {
 } from '../../../../translator';
 
 const {sensors, selectedSensor, fetchAll} = useSensor();
-const measurements = ref([
-  {
+const measurements = ref({
+  temperature: {
     name: trans(MEASUREMENTS_TEMPERATURE),
-    measures: [82,82,81,80,75,86,86,89,82,74,85,96],
+    measures: [],
     color: 'rgba(252, 92, 125, 1)',
     isLimit: true
   },
-  {
+  humidity: {
     name: trans(MEASUREMENTS_HUMIDITY),
-    measures: [99,77,55,66,87,79,83,67,87,66,99,90],
+    measures: selectedSensor.value.offsetMeasurement.humidity,
     color: 'rgba(255, 188, 66, 1)',
     isLimit: false
   },
-  {
+  lux: {
     name: trans(MEASUREMENTS_LUX),
-    measures: [0,1,81,11,0,0,6,7,82,0,0,96,66],
+    measures: selectedSensor.value.offsetMeasurement.lux,
     color: 'rgba(48, 169, 222, 1)',
     isLimit: false
   },
-  {
+  decibel: {
     name: trans(MEASUREMENTS_NOISE),
-    measures: [11,12,33,55,21,86,86,89,82,23,33,11],
+    measures: selectedSensor.value.offsetMeasurement.decibel,
     color: 'rgba(108, 73, 184, 1)',
     isLimit: true
   },
-  {
+  pressure: {
     name: trans(MEASUREMENTS_PRESSURE),
-    measures: [334,334,211,334,211,334,211,334,211,334,211,334],
+    measures: selectedSensor.value.offsetMeasurement.pressure,
     color: 'rgba(103, 213, 181, 1)',
     isLimit: false
   },
-  {
+  co2: {
     name: trans(MEASUREMENTS_CO2),
     measures: [],
     color: 'rgb(11,199,77)',
     isLimit: false
   }
-]);
+});
 const lastMeasurement = ref("");
 
 onMounted( async () => {
   await fetchAll();
+});
 
-  const lastMeasurementData = selectedSensor.value.lastMeasurement.createdAtArray;
-  getLastMeasurementsMessage(lastMeasurementData.type, lastMeasurementData.value);
+watch(selectedSensor, (current) => {
+  getLastMeasurementsMessage();
+
+  measurements.value.temperature.measures = selectedSensor.value.offsetMeasurement.temperature;
+  measurements.value.humidity.measures = selectedSensor.value.offsetMeasurement.humidity;
+  measurements.value.lux.measures = selectedSensor.value.offsetMeasurement.lux;
+  measurements.value.decibel.measures = selectedSensor.value.offsetMeasurement.decibel;
+  measurements.value.pressure.measures = selectedSensor.value.offsetMeasurement.pressure;
 });
 
 const selectMeasurement = () => {
   console.log('asd');
 }
 
-const getLastMeasurementsMessage = (type, value) => {
-  switch (type) {
+const getLastMeasurementsMessage = () => {
+  const lastMeasurementData = selectedSensor.value.lastMeasurement.createdAtArray;
+  switch (lastMeasurementData.type) {
     case "years":
-      lastMeasurement.value = trans(TIME_AGO_YEARS, { 'count': value });
+      lastMeasurement.value = trans(TIME_AGO_YEARS, { 'count': lastMeasurementData.value });
       break;
     case "months":
-      lastMeasurement.value = trans(TIME_AGO_MONTHS, { 'count': value });
+      lastMeasurement.value = trans(TIME_AGO_MONTHS, { 'count': lastMeasurementData.value });
       break;
     case "days":
-      lastMeasurement.value = trans(TIME_AGO_DAYS, { 'count': value });
+      lastMeasurement.value = trans(TIME_AGO_DAYS, { 'count': lastMeasurementData.value });
       break;
     case "hours":
-      lastMeasurement.value = trans(TIME_AGO_HOURS, { 'count': value });
+      lastMeasurement.value = trans(TIME_AGO_HOURS, { 'count': lastMeasurementData.value });
       break;
     case "minutes":
-      lastMeasurement.value = trans(TIME_AGO_MINUTES, { 'count': value });
+      lastMeasurement.value = trans(TIME_AGO_MINUTES, { 'count': lastMeasurementData.value });
       break;
     default:
-      lastMeasurement.value = trans(TIME_AGO_SECONDS, { 'count': value });
+      lastMeasurement.value = trans(TIME_AGO_SECONDS, { 'count': lastMeasurementData.value });
   }
 }
 </script>

@@ -124,6 +124,8 @@ class Sensor
             'humidity' => array_column($offsetData, 'humidity'),
             'pressure' => array_column($offsetData, 'pressure'),
             'decibel' => array_column($offsetData, 'decibel'),
+            'lux' =>    array_column($offsetData, 'lux'),
+            'noise' =>    array_column($offsetData, 'noise'),
         ];
     }
 

@@ -1,8 +1,9 @@
 <template>
-  <div :class="{
-    'data_graph': true,
-    'loaded': isLoaded
-  }" v-html="svgImage" />
+    <Bar
+        id="my-chart-id"
+        :options="chartOptions"
+        :data="chartData"
+    />
 </template>
 <style lang="scss">
   .data_graph {
@@ -21,95 +22,59 @@
   }
 </style>
 <script setup>
-  import {onMounted, ref} from "vue";
+  import { onMounted, onUpdated, ref } from "vue";
+  import { Bar } from 'vue-chartjs'
+  // import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
+  import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
+
+  ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
   const isLoaded = ref(false);
   const svgImage = ref('');
   const props = defineProps({
     measure: Array,
-    color: String,
-    type: String
+    color: String
   });
 
-  onMounted(async () => {
-    await fetch("https://quickchart.io/chart", {
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      method: "POST",
-      body: JSON.stringify({
-        "version": 2,
-        "height": 200,
-        "width": 250,
-        "backgroundColor": 'transparent',
-        "format": 'svg',
-        "chart": {
-          "type": 'line',
-          "data": {
-            "labels": props.measure,
-            "datasets": [
-              {
-                "borderJoinStyle": 'round',
-                "label": false,
-                "data": props.measure,
-                "borderColor": props.color,
-                "fill": false,
-                "lineTension": 0.2
-              }
-            ]
-          },
-          "options": {
-            "scales": {
-              "yAxes": [
-                {
-                  "gridLines": {
-                    "display": false
-                  },
-                  "ticks": {
-                    "display": false
-                  }
-                }
-              ],
-              "xAxes": [
-                {
-                  "gridLines": {
-                    "display": false
-                  },
-                  "ticks": {
-                    "display": false
-                  }
-                }
-              ]
-            },
-            "legend": {
-              "labels": {
-                "generateLabels": "function(chart) { return ''; }"
-              }
-            },
-            "elements": {
-              "point": {
-                "radius": 0
-              }
+  const chartOptions = ref({
+    responsive: true
+  });
+  const chartData = ref({
+    labels: [],
+    datasets: [ { data: [] } ]
+  });
+
+  onUpdated(async () => {
+
+    if (props.measure.length > 10) {
+
+      chartData.value = {
+        labels: props.measure,
+        datasets: [
+            {
+              borderJoinStyle: 'round',
+              label: false,
+              data: props.measure,
+              borderColor: props.color,
+              fill: false,
+              lineTension: 0.2
             }
-          }
-        }
-      })
-    })
-        .then(async (res) => {
-          svgImage.value = await res.text();
-          isLoaded.value = true;
-          console.log(isLoaded.value);
-        })
-        .catch(console.error.bind(console));
+          ]
+      };
+
+
+    } else {
+      console.log('not enough data to render chart')
+    }
+
   });
 </script>
 <style lang="scss" module>
-.data_graph {
-  position: absolute;
-  z-index: 1;
-  width: 100%;
-  top: -10px;
-  left: -15px;
-}
+  .data_graph {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    top: -10px;
+    left: -15px;
+  }
 </style>
