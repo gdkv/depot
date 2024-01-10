@@ -14,7 +14,9 @@ const state = reactive({
 export default function useCurrentUser() {
 
     const fetch = async () => {
-        state.currentUser = await AuthService.user();
+        if (!state.currentUser.id) {
+            state.currentUser = await AuthService.user();
+        }
     }
 
     return {

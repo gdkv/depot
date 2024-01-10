@@ -61,31 +61,31 @@ const measurements = ref({
   },
   humidity: {
     name: trans(MEASUREMENTS_HUMIDITY),
-    measures: selectedSensor.value.offsetMeasurement.humidity,
+    measures: [],
     color: 'rgba(255, 188, 66, 1)',
     isLimit: false
   },
   lux: {
     name: trans(MEASUREMENTS_LUX),
-    measures: selectedSensor.value.offsetMeasurement.lux,
+    measures: [],
     color: 'rgba(48, 169, 222, 1)',
     isLimit: false
   },
   decibel: {
     name: trans(MEASUREMENTS_NOISE),
-    measures: selectedSensor.value.offsetMeasurement.decibel,
+    measures: [],
     color: 'rgba(108, 73, 184, 1)',
     isLimit: true
   },
   pressure: {
     name: trans(MEASUREMENTS_PRESSURE),
-    measures: selectedSensor.value.offsetMeasurement.pressure,
+    measures: [],
     color: 'rgba(103, 213, 181, 1)',
     isLimit: false
   },
   co2: {
     name: trans(MEASUREMENTS_CO2),
-    measures: [],
+    measures: [10, 800, 1100, NaN, NaN, 10, 18, 299, 380, 700, 800, 1110, 10, 12, NaN, 499],
     color: 'rgb(11,199,77)',
     isLimit: false
   }

@@ -30,11 +30,11 @@ class AuthService {
     }
 
     user(){
-        const {currentUser} = useCurrentUser();
-
-        if (currentUser.id) {
-            return currentUser;
-        }
+        // const {currentUser} = useCurrentUser();
+        //
+        // if (currentUser.id) {
+        //     return currentUser;
+        // }
 
         return fetch(routes.auth.user.url, {
             method: routes.auth.user.method,
