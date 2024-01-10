@@ -1,7 +1,7 @@
 <template>
   <section class="dashboard">
     <div class="info-line">
-      Последние данные: {{ selectedSensor.lastMeasurement.createdAt }}
+      Последние данные: {{ lastMeasurement }}
     </div>
 
     <div :class="$style.last_data" data-slideout-ignore>
@@ -42,11 +42,16 @@ import {
   MEASUREMENTS_LUX,
   MEASUREMENTS_NOISE,
   MEASUREMENTS_PRESSURE,
-  MEASUREMENTS_CO2
+  MEASUREMENTS_CO2,
+  TIME_AGO_HOURS,
+  TIME_AGO_MINUTES,
+  TIME_AGO_DAYS,
+  TIME_AGO_YEARS,
+  TIME_AGO_MONTHS,
+  TIME_AGO_SECONDS
 } from '../../../../translator';
 
 const {sensors, selectedSensor, fetchAll} = useSensor();
-// const selectedSensor = ref(null);
 const measurements = ref([
   {
     name: trans(MEASUREMENTS_TEMPERATURE),
@@ -85,14 +90,39 @@ const measurements = ref([
     isLimit: false
   }
 ]);
+const lastMeasurement = ref("");
 
-onMounted(async () => {
+onMounted( async () => {
   await fetchAll();
-  console.log(selectedSensor.value.lastMeasurement.createdAtArray);
+
+  const lastMeasurementData = selectedSensor.value.lastMeasurement.createdAtArray;
+  getLastMeasurementsMessage(lastMeasurementData.type, lastMeasurementData.value);
 });
 
 const selectMeasurement = () => {
   console.log('asd');
+}
+
+const getLastMeasurementsMessage = (type, value) => {
+  switch (type) {
+    case "years":
+      lastMeasurement.value = trans(TIME_AGO_YEARS, { 'count': value });
+      break;
+    case "months":
+      lastMeasurement.value = trans(TIME_AGO_MONTHS, { 'count': value });
+      break;
+    case "days":
+      lastMeasurement.value = trans(TIME_AGO_DAYS, { 'count': value });
+      break;
+    case "hours":
+      lastMeasurement.value = trans(TIME_AGO_HOURS, { 'count': value });
+      break;
+    case "minutes":
+      lastMeasurement.value = trans(TIME_AGO_MINUTES, { 'count': value });
+      break;
+    default:
+      lastMeasurement.value = trans(TIME_AGO_SECONDS, { 'count': value });
+  }
 }
 </script>
 

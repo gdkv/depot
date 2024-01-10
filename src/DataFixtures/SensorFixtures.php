@@ -33,14 +33,14 @@ class SensorFixtures extends Fixture implements DependentFixtureInterface
     private function entities(): Generator
     {
         yield new Sensor(
-            'Sensor 1', 'a0-20-a6-11-b9-f3',
+            'Sensor 🤖', 'a0-20-a6-11-b9-f3',
             $this->getReference('user-1'),
             $this->getReference('zone-1'), SensorType::Default,
             null, null
         );
 
         yield new Sensor(
-            'Sensor 2', 'bc-dd-88-ed-4d-ff',
+            'Sensor 🐸', 'bc-dd-88-ed-4d-ff',
             $this->getReference('user-1'),
             $this->getReference('zone-1'), SensorType::Default,
             null, null

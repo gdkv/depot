@@ -58,32 +58,50 @@ measurements:
 time_ago:
   years: >-
     {count, plural,
-      =1    {one year ago}
-      other {# years ago}
+      =1    {один год назад}
+      one   {# год назад}
+      few   {# года назад}
+      many  {# лет назад}
+      other {# года назад}
     }
   months: >-
     {count, plural,
-      =1    {one month ago}
-      other {# months ago}
+      =1    {один месяц назад}
+      one   {# месяц назад}
+      few   {# месяца назад}
+      many  {# месяцев назад}
+      other {# месяца назад}
     }
   days: >-
     {count, plural,
-      =1    {one day ago}
-      other {# day ago}
+      =1    {один день назад}
+      one   {# день назад}
+      few   {# дня назад}
+      many  {# дней назад}
+      other {# дня назад}
     }
   hours: >-
     {count, plural,
-      =1    {one hour ago}
-      other {# hours ago}
+      =1    {один час назад}
+      one   {# час назад}
+      few   {# часа назад}
+      many  {# часов назад}
+      other {# часа назад}
     }
   minutes: >-
     {count, plural,
-      =1    {one minute ago}
-      other {# minutes ago}
+      =1    {одну минуту назад}
+      one   {# минуту назад}
+      few   {# минуты назад}
+      many  {# минут назад}
+      other {# минуты назад}
     }
   seconds: >-
    {count, plural,
-     =0    {just now}
-     =1    {one minute ago}
-     other {# minutes ago}
+     =0    {прямо сейчас}
+     =1    {одну секунду назад}
+     one   {# секунду назад}
+     few   {# секунды назад}
+     many  {# секунд назад}
+     other {# секунды назад}
    }

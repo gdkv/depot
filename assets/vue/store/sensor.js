@@ -9,7 +9,11 @@ const state = reactive({
         name: null,
         lastMeasurement: {
             id: null,
-            createdAt: '00.00.0000 00:00:00'
+            createdAt: '00.00.0000 00:00:00',
+            createdAtArray: {
+                type: 'days',
+                value: 100
+            }
         }
     }
 });
