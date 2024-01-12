@@ -2,6 +2,7 @@
 
 namespace App\Entity\Traits;
 
+use App\Entity\Sensor\Measurement;
 use App\Service\Helpers\TimeAgoHelper;
 use DateTime;
 use DateTimeInterface;
@@ -27,6 +28,11 @@ trait EntityCreatedAtTrait {
         return $this->createdAt;
     }
 
+    #[OA\Property(
+        description: 'Дата создания в виде массива',
+        type: 'array',
+        items: new OA\Items(type: 'string')
+    )]
     public function getCreatedAtArray(): array
     {
 

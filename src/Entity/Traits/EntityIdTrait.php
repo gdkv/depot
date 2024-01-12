@@ -13,7 +13,7 @@ trait EntityIdTrait {
     #[ORM\GeneratedValue(strategy: 'CUSTOM')]
     #[ORM\Column(type: 'uuid', unique: true)]
     #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
-    #[OA\Property(description: 'ID')]
+    #[OA\Property(description: 'ID', type: 'string')]
     #[Assert\Uuid]
     private ?Uuid $id;
 

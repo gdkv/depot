@@ -16,6 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\PersistentCollection;
 use OpenApi\Attributes as OA;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Ignore;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\HasLifecycleCallbacks]
@@ -52,6 +53,7 @@ class Sensor
         type: 'array',
         items: new OA\Items(ref: Measurement::class)
     )]
+    #[Ignore]
     private PersistentCollection $measurement;
 
     #[ORM\ManyToOne(targetEntity: User::class)]
@@ -116,6 +118,19 @@ class Sensor
         return $this->measurement;
     }
 
+    #[OA\Property(
+        description: 'Массив последних двадцати измерений (измерения за последний час)',
+        type: 'array',
+        items: new OA\Items(
+            properties: [
+                new OA\Property(property: 'temperature', type: 'array', items: new OA\Items(type: 'number')),
+                new OA\Property(property: 'humidity', type: 'array', items: new OA\Items(type: 'number')),
+                new OA\Property(property: 'pressure', type: 'array', items: new OA\Items(type: 'number')),
+                new OA\Property(property: 'decibel', type: 'array', items: new OA\Items(type: 'number')),
+                new OA\Property(property: 'lux', type: 'array', items: new OA\Items(type: 'number')),
+            ]
+        )
+    )]
     public function getOffsetMeasurement(): array
     {
         $offsetData = $this->measurement->slice(-20, 20);
@@ -124,8 +139,7 @@ class Sensor
             'humidity' => array_column($offsetData, 'humidity'),
             'pressure' => array_column($offsetData, 'pressure'),
             'decibel' => array_column($offsetData, 'decibel'),
-            'lux' =>    array_column($offsetData, 'lux'),
-            'noise' =>    array_column($offsetData, 'noise'),
+            'lux' => array_column($offsetData, 'lux'),
         ];
     }
 
@@ -134,6 +148,16 @@ class Sensor
         return $this->measurement->last();
     }
 
+    #[OA\Property(
+        description: 'Статус сенсора (онлайн/офлайн)',
+        type: 'array',
+        items: new OA\Items(
+            properties: [
+                new OA\Property(property: 'value', type: 'bool'),
+                new OA\Property(property: 'text', type: 'string'),
+            ]
+        )
+    )]
     public function getStatus(): array
     {
         if (

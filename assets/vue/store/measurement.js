@@ -7,9 +7,10 @@ import {
     MEASUREMENTS_NOISE, MEASUREMENTS_PRESSURE,
     MEASUREMENTS_TEMPERATURE
 } from "../../translator";
+import MeasurementService from "../services/measurement.service";
 
 const state = reactive({
-    measurements: {
+    measurementsTypes: {
         temperature: {
             name: trans(MEASUREMENTS_TEMPERATURE),
             measures: [],
@@ -52,19 +53,21 @@ const state = reactive({
             isLimit: false,
             isSelected: false
         }
-    }
+    },
+    measurements: []
 });
 
 export default function useMeasurement() {
 
-    const fetch = async (type, period) => {
+    const fetchMeasurement = async (sensor, type, period) => {
         // if (!state.currentUser.id) {
-        //     state.currentUser = await AuthService.user();
+        state.measurements = await MeasurementService.list(sensor, type, period);
+        console.log(state.measurements);
         // }
     }
 
     return {
         ...toRefs(state),
-        fetch
+        fetchMeasurement
     }
 }

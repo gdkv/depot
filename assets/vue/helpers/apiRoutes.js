@@ -29,5 +29,12 @@ export const ApiRoutes = {
         },
         delete: {},
         get: {}
+    },
+
+    measurements: {
+        list: {
+            url: '/api/measurement',
+            method: 'POST'
+        }
     }
 }

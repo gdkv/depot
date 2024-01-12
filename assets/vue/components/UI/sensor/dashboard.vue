@@ -8,7 +8,7 @@
       <div @click="selectMeasurement(type)" :class="{
         [$style.data]: true,
         [$style.active]: selectedMeasurementType === type
-      }" v-for="(measurement, type) in measurements">
+      }" v-for="(measurement, type) in measurementsTypes">
         <data-graph :measure="measurement.measures" :color="measurement.color" />
         <div :class="$style.is_limit" v-text="measurement.isLimit ? 'lim' : ''"/>
         <div :class="$style.data_info">
@@ -43,7 +43,7 @@ import {
 
 
 const {sensors, selectedSensor, fetchAll} = useSensor();
-const {measurements} = useMeasurement();
+const {measurementsTypes} = useMeasurement();
 const lastMeasurement = ref("");
 const selectedMeasurementType = ref("temperature");
 
@@ -54,16 +54,15 @@ onMounted( async () => {
 watch(selectedSensor, (current) => {
   getLastMeasurementsMessage();
 
-  measurements.value.temperature.measures = selectedSensor.value.offsetMeasurement.temperature;
-  measurements.value.humidity.measures = selectedSensor.value.offsetMeasurement.humidity;
-  measurements.value.lux.measures = selectedSensor.value.offsetMeasurement.lux;
-  measurements.value.decibel.measures = selectedSensor.value.offsetMeasurement.decibel;
-  measurements.value.pressure.measures = selectedSensor.value.offsetMeasurement.pressure;
+  measurementsTypes.value.temperature.measures = selectedSensor.value.offsetMeasurement.temperature;
+  measurementsTypes.value.humidity.measures = selectedSensor.value.offsetMeasurement.humidity;
+  measurementsTypes.value.lux.measures = selectedSensor.value.offsetMeasurement.lux;
+  measurementsTypes.value.decibel.measures = selectedSensor.value.offsetMeasurement.decibel;
+  measurementsTypes.value.pressure.measures = selectedSensor.value.offsetMeasurement.pressure;
 });
 
 const selectMeasurement = (measurementType) => {
   selectedMeasurementType.value = measurementType;
-  console.log(measurementType);
 }
 
 const getLastMeasurementsMessage = () => {
