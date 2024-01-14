@@ -1,5 +1,5 @@
 <script setup>
-import {onMounted, onUpdated, ref, watch} from "vue";
+import {onMounted, onUpdated, reactive, ref, watch} from "vue";
 import useSensor from "../../store/sensor";
 import { Line } from 'vue-chartjs';
 import Switcher from "./switcher.vue";
@@ -10,14 +10,15 @@ import useMeasurement from "../../store/measurement";
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement);
 
 const {selectedSensor} = useSensor();
-const {fetchMeasurement} = useMeasurement();
-const temp = 'temp';
+const {measurements,fetchMeasurement} = useMeasurement();
+const switcherClickedId = ref('');
 const props = defineProps({
   selectedType: String
 });
+const reactiveProps = reactive(props);
 const switchers = ref([
-  {active: true, text: 'last 1h', info: 'ddd', id: '1h' },
-  {active: false, text: 'last 24h', info: 'ddd', id: '24h' },
+  {active: true, text: 'last 1h', info: 'ddd', id: 'hour' },
+  {active: false, text: 'last 24h', info: 'ddd', id: 'day' },
   {active: false, text: 'week', info: 'ddd', id: 'week' },
   {active: false, text: 'month', info: 'ddd', id: 'month' },
   {active: false, text: '3 month', info: 'ddd', id: 'quarter' },
@@ -53,26 +54,25 @@ const chartData = ref({
 });
 
 const changedPeriod = (switcherClicked) => {
+  switcherClickedId.value = switcherClicked.id;
   switchers.value.map(switcher => switcher.active = switcher.id === switcherClicked.id);
 }
 
-watch(selectedSensor, async (current) => {
-  console.log(props.selectedType);
-  console.log(selectedSensor.value.id);
-  console.log(switchers.value.find(e => e.active).id);
+watch([selectedSensor, reactiveProps, switcherClickedId], async () => {
 
-  await fetchMeasurement(selectedSensor.value.id, props.selectedType, switchers.value.find(e => e.active).id);
-});
+  await fetchMeasurement(
+      selectedSensor.value.macAddress,
+      props.selectedType,
+      switchers.value.find(e => e.active).id
+  );
 
-onUpdated(() => {
-  console.log(props.selectedType);
-  console.log(selectedSensor.value.id);
-  console.log(switchers.value.find(e => e.active).id);
+  
+
 });
 </script>
 
 <template>
-  <h1 v-text="temp" />
+  <h1 v-text="`test`" />
 
   <switcher :switchers="switchers" v-on:switcherClick="changedPeriod" />
 

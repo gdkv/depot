@@ -62,7 +62,7 @@ export default function useMeasurement() {
     const fetchMeasurement = async (sensor, type, period) => {
         // if (!state.currentUser.id) {
         state.measurements = await MeasurementService.list(sensor, type, period);
-        console.log(state.measurements);
+        // console.log(state.measurements);
         // }
     }
 

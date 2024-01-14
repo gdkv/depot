@@ -4,14 +4,15 @@ namespace App\Model\Dto;
 
 use App\Model\Enum\MeasurementType;
 use App\Model\Enum\PeriodType;
+use App\Validator\ConstraintsMacAddress;
 use Symfony\Component\Validator\Constraints as Assert;
 
 readonly class MeasurementDto
 {
     public function __construct(
         #[Assert\NotBlank]
-        #[Assert\Uuid]
-        private ?string $sensor,
+        #[ConstraintsMacAddress]
+        private ?string $sensorMacAddress,
 
         #[Assert\NotBlank]
         #[Assert\Type('string')]
@@ -24,9 +25,9 @@ readonly class MeasurementDto
         private ?string $period,
     ){}
 
-    public function getSensor(): ?string
+    public function getSensorMacAddress(): ?string
     {
-        return $this->sensor;
+        return $this->sensorMacAddress;
     }
 
     public function getMeasurementType(): ?string

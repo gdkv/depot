@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use OpenApi\Attributes as OA;
 use Nelmio\ApiDocBundle\Annotation\Model;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class ListController extends AbstractController
 {
@@ -38,34 +39,47 @@ class ListController extends AbstractController
     #[OA\RequestBody(content: new Model(type: MeasurementDto::class))]
     #[OA\Tag(name: 'Измерения')]
     #[Security(name: 'Bearer')]
-    public function __invoke(MeasurementDto $measurementDto, MeasurementRepository $repository, SensorRepository $sensorRepository): JsonResponse
+    public function __invoke(
+        MeasurementDto $measurementDto,
+        MeasurementRepository $repository,
+        SensorRepository $sensorRepository,
+        ValidatorInterface $validator
+    ): JsonResponse
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
 
-        $sensor = $sensorRepository->findAll();
+        $errors = $validator->validate($measurementDto);
 
-        $sql = $repository->findByType(
-            $sensor[0],
-            MeasurementType::Temperature,
-            PeriodType::Year
+        if (count($errors) > 0) {
+            return $this->jsonResponseError(
+                "Not valid MeasurementDto",
+                'not_valid_measurement_dto'
+            );
+        }
+
+        $sensor = $sensorRepository->findOneBy(
+            ['user' => $this->getUser(), 'active' => true, 'macAddress' => $measurementDto->getSensorMacAddress()],
         );
 
-        //
-        dd([
-            'sql' => $sql,
-            'param' => [
-                'sensor' => $sensor[0]->getId(),
-                'type' => MeasurementType::Temperature,
-                'period' => PeriodType::Year
-            ]
-        ]);
+        if ($sensor instanceof Sensor) {
+            return $this->jsonResponse(
+                $repository->findByType(
+                    $sensor,
+                    MeasurementType::tryFrom($measurementDto->getMeasurementType()),
+                    PeriodType::tryFrom($measurementDto->getPeriod())
+                )
+            );
 
-        return $this->jsonResponse(
-            $repository->findByType(
-                $sensor[2]->getId(),
-                MeasurementType::Temperature,
-                PeriodType::Hour
-            )
+        }
+
+        return $this->jsonResponseError(
+            "Sensor with mac address not found or it is not active",
+            'sensor_not_found_or_unactive',
+            [
+                'mac address' => $measurementDto->getSensorMacAddress(),
+                'type' => $measurementDto->getMeasurementType(),
+                'period' => $measurementDto->getPeriod(),
+            ]
         );
     }
 }

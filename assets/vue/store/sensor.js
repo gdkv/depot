@@ -7,6 +7,7 @@ const state = reactive({
     selectedSensor: {
         id: null,
         name: null,
+        macAddress: '00-00-00-00-00-00',
         offsetMeasurement: {
             temperature: [],
             humidity: [],

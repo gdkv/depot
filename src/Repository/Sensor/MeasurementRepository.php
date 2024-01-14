@@ -50,8 +50,6 @@ class MeasurementRepository extends ServiceEntityRepository
         return $qb
             ->addOrderBy(new OrderBy('m.createdAt', 'ASC'))
             ->getQuery()
-            // ->getSQL()
-            // ->getParameters()
             ->getResult()
             ;
     }
