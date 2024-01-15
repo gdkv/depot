@@ -26,19 +26,19 @@
                 <div>
 
                     <div class="quick-links">
-                        <a href="{{ path('app.app') }}">Add sensor</a>
-                        <a href="{{ path('app.app') }}">Add room</a>
+                        <a href="{{ path('app.sensor') }}">{{ 'dashboard.menu.buttons.add_sensor' | trans }}</a>
+                        <a href="{{ path('app.app') }}">{{ 'dashboard.menu.buttons.add_room' | trans }}</a>
                     </div>
                     <div class="main">
-                        <a href="{{ path('app.app') }}">Sensors</a>
-                        <a href="{{ path('app.app') }}">Rooms</a>
-                        <a href="{{ path('app.app') }}">Settings</a>
-                        <a href="{{ path('app.app') }}">Reports</a>
-                        <a href="{{ path('app.app') }}">Notify</a>
+                        <a href="{{ path('app.sensor') }}">{{ 'dashboard.menu.links.sensors' | trans }}</a>
+                        <a href="{{ path('app.app') }}">{{ 'dashboard.menu.links.rooms' | trans }}</a>
+                        <a href="{{ path('app.app') }}">{{ 'dashboard.menu.links.settings' | trans }}</a>
+                        <a href="{{ path('app.app') }}">{{ 'dashboard.menu.links.reports' | trans }}</a>
+                        <a href="{{ path('app.app') }}">{{ 'dashboard.menu.links.notify' | trans }}</a>
                     </div>
 
                     <div class="logout">
-                        <a href="{{ path('app.app') }}" class="btn btn-red">Logout</a>
+                        <a href="{{ path('app.app') }}" class="btn btn-red">{{ 'dashboard.menu.buttons.logout' | trans }}</a>
                     </div>
 
                 </div>

@@ -35,6 +35,19 @@ main:
 exceptions:
   user_create_exception: 'Error while user creation'
 
+dashboard:
+  menu:
+    buttons:
+      add_sensor: 'Add sensor'
+      add_room: 'Add room'
+      logout: 'Logout'
+    links:
+      sensors: 'Sensors'
+      rooms: 'Rooms'
+      settings: 'Settings'
+      reports: 'Reports'
+      notify: 'Notify'
+
 sensor:
   type:
     default: 'Default'
@@ -51,6 +64,7 @@ measurements:
   co2: 'CO<sub>2</sub>'
 
 time_ago:
+  title: 'The latest measurements'
   years: >-
     {count, plural,
       =1    {one year ago}

@@ -35,7 +35,7 @@ class Sensor
     private string $macAddress;
 
     #[ORM\ManyToOne(targetEntity: Zone::class)]
-    private Zone $zone;
+    private ?Zone $zone;
 
     #[ORM\Column(type: Types::STRING, enumType: SensorType::class)]
     #[Assert\NotBlank]
@@ -98,7 +98,7 @@ class Sensor
         return $this->macAddress;
     }
 
-    public function getZone(): Zone
+    public function getZone(): ?Zone
     {
         return $this->zone;
     }

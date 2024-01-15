@@ -55,7 +55,21 @@ measurements:
   pressure: 'Давление'
   co2: 'CO<sub>2</sub>'
 
+dashboard:
+  menu:
+    buttons:
+      add_sensor: 'Добавить сенсор'
+      add_room: 'Добавить комнату'
+      logout: 'Выйти'
+    links:
+      sensors: 'Сенсоры'
+      rooms: 'Комнаты'
+      settings: 'Настройки'
+      reports: 'Отчеты'
+      notify: 'Оповещения'
+
 time_ago:
+  title: 'Последние данные'
   years: >-
     {count, plural,
       =1    {один год назад}

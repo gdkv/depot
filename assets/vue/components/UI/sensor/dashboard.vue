@@ -1,7 +1,7 @@
 <template>
   <section class="dashboard">
     <div class="info-line">
-      Последние данные: {{ lastMeasurement }}
+      {{ trans(TIME_AGO_TITLE) }}: {{ lastMeasurement }}
     </div>
 
     <div :class="$style.last_data" data-slideout-ignore>
@@ -33,6 +33,7 @@ import FullGraph from "../fullGraph.vue";
 
 import {
   trans,
+  TIME_AGO_TITLE,
   TIME_AGO_HOURS,
   TIME_AGO_MINUTES,
   TIME_AGO_DAYS,
