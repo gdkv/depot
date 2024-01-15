@@ -54,7 +54,11 @@ const state = reactive({
             isSelected: false
         }
     },
-    measurements: []
+    measurements: [
+        {measure: 0, createdAt: '2024-01-01T00:00:00+00:00'},
+        {measure: 0, createdAt: '2024-01-01T00:05:00+00:00'},
+        {measure: 0, createdAt: '2024-01-01T00:10:00+00:00'}
+    ]
 });
 
 export default function useMeasurement() {

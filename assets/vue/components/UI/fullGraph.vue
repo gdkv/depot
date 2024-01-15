@@ -42,33 +42,45 @@ const chartOptions = ref({
 });
 
 const chartData = ref({
-  labels: [],
+  labels: measurements.value.map(m => m.createdAt),
   datasets: [{
     borderJoinStyle: 'round',
     label: false,
-    data: [],
+    data: measurements.value.map(m => m.measure),
     borderColor: 'rgb(11,199,77)',
     fill: false,
     lineTension: 0.2
   }]
 });
 
-const changedPeriod = (switcherClicked) => {
+const changedPeriod = async (switcherClicked) => {
+
   switcherClickedId.value = switcherClicked.id;
   switchers.value.map(switcher => switcher.active = switcher.id === switcherClicked.id);
-}
-
-watch([selectedSensor, reactiveProps, switcherClickedId], async () => {
 
   await fetchMeasurement(
       selectedSensor.value.macAddress,
       props.selectedType,
       switchers.value.find(e => e.active).id
   );
+}
 
-  
 
+watch([measurements], () => {
+
+  chartData.value = {
+    labels: measurements.value.map(m => m.createdAt),
+    datasets: [{
+      borderJoinStyle: 'round',
+      label: false,
+      data: measurements.value.map(m => m.measure),
+      borderColor: '#ffffff',
+      fill: false,
+      lineTension: 0.4
+    }]
+  };
 });
+
 </script>
 
 <template>
