@@ -25,7 +25,24 @@ class SensorService {
     }
 
     add(sensor) {
-        return {};
+        return fetch(routes.sensor.add.url, {
+            method: routes.sensor.add.method,
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${this.token}`
+            },
+            body: JSON.stringify({
+                name: sensor.name,
+                macAddress: sensor.macAddress,
+                sensorType: 'sensor.type.default',
+
+            })
+        })
+            .then(response => response.json())
+            .then((sensorList) => {
+                return sensorList;
+            });
     }
 
     delete() {

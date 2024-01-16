@@ -70,6 +70,7 @@ dashboard:
 
 time_ago:
   title: 'Последние данные'
+  no_data: 'нет данных'
   years: >-
     {count, plural,
       =1    {один год назад}

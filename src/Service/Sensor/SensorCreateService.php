@@ -44,15 +44,19 @@ class SensorCreateService
             throw new SensorCreateException($this->errors);
         }
 
-        $zone = $this->zoneRepository->find($sensorDto->getZoneUuid());
-        if ($zone === null) {
-            $this->errors = $this->getZoneNotFoundConstraint($sensorDto->getZoneUuid());
-            throw new SensorCreateException($this->errors);
+        $zone = null;
+        if ($sensorDto->getZoneUuid()) {
+            $zone = $this->zoneRepository->find($sensorDto->getZoneUuid());
+            if ($zone === null) {
+                $this->errors = $this->getZoneNotFoundConstraint($sensorDto->getZoneUuid());
+                throw new SensorCreateException($this->errors);
+            }
         }
 
         $this->sensor = new Sensor(
             $sensorDto->getName(),
             $sensorDto->getMacAddress(),
+            $sensorDto->getComment(),
             $this->security->getUser(),
             $zone,
             SensorType::tryFrom($sensorDto->getSensorType()),

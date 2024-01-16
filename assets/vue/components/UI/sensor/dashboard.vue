@@ -33,6 +33,7 @@ import FullGraph from "../fullGraph.vue";
 
 import {
   trans,
+  TIME_AGO_NO_DATA,
   TIME_AGO_TITLE,
   TIME_AGO_HOURS,
   TIME_AGO_MINUTES,
@@ -68,25 +69,30 @@ const selectMeasurement = (measurementType) => {
 
 const getLastMeasurementsMessage = () => {
   const lastMeasurementData = selectedSensor.value.lastMeasurement.createdAtArray;
-  switch (lastMeasurementData.type) {
-    case "years":
-      lastMeasurement.value = trans(TIME_AGO_YEARS, { 'count': lastMeasurementData.value });
-      break;
-    case "months":
-      lastMeasurement.value = trans(TIME_AGO_MONTHS, { 'count': lastMeasurementData.value });
-      break;
-    case "days":
-      lastMeasurement.value = trans(TIME_AGO_DAYS, { 'count': lastMeasurementData.value });
-      break;
-    case "hours":
-      lastMeasurement.value = trans(TIME_AGO_HOURS, { 'count': lastMeasurementData.value });
-      break;
-    case "minutes":
-      lastMeasurement.value = trans(TIME_AGO_MINUTES, { 'count': lastMeasurementData.value });
-      break;
-    default:
-      lastMeasurement.value = trans(TIME_AGO_SECONDS, { 'count': lastMeasurementData.value });
+  if (lastMeasurementData) {
+    switch (lastMeasurementData.type) {
+      case "years":
+        lastMeasurement.value = trans(TIME_AGO_YEARS, { 'count': lastMeasurementData.value });
+        break;
+      case "months":
+        lastMeasurement.value = trans(TIME_AGO_MONTHS, { 'count': lastMeasurementData.value });
+        break;
+      case "days":
+        lastMeasurement.value = trans(TIME_AGO_DAYS, { 'count': lastMeasurementData.value });
+        break;
+      case "hours":
+        lastMeasurement.value = trans(TIME_AGO_HOURS, { 'count': lastMeasurementData.value });
+        break;
+      case "minutes":
+        lastMeasurement.value = trans(TIME_AGO_MINUTES, { 'count': lastMeasurementData.value });
+        break;
+      default:
+        lastMeasurement.value = trans(TIME_AGO_SECONDS, { 'count': lastMeasurementData.value });
+    }
+  } else {
+    lastMeasurement.value = trans(TIME_AGO_NO_DATA);
   }
+
 }
 </script>
 

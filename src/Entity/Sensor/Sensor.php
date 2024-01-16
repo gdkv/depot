@@ -59,9 +59,14 @@ class Sensor
     #[ORM\ManyToOne(targetEntity: User::class)]
     private ?User $user;
 
+    #[ORM\Column(type: Types::TEXT)]
+    #[OA\Property(description: 'Комментарий')]
+    private ?string $comment;
+
     public function __construct(
         string $name,
         string $macAddress,
+        ?string $comment,
         ?User $user,
         ?Zone $zone,
         ?SensorType $type,
@@ -69,12 +74,13 @@ class Sensor
         ?bool $active,
     )
     {
-        $this->update($name, $macAddress, $user, $zone, $type, $position, $active);
+        $this->update($name, $macAddress, $comment, $user, $zone, $type, $position, $active);
     }
 
     public function update(
         string $name,
         string $macAddress,
+        string $comment,
         ?User $user,
         ?Zone $zone,
         ?SensorType $type,
@@ -84,6 +90,7 @@ class Sensor
     {
         $this->name = $name;
         $this->macAddress = $macAddress;
+        $this->comment = $comment;
         $this->user = $user ?? null;
         $this->zone = $zone ?? null;
         $this->type = $type ?? SensorType::Default;
@@ -96,6 +103,11 @@ class Sensor
     public function getMacAddress(): string
     {
         return $this->macAddress;
+    }
+
+    public function getComment(): ?string
+    {
+        return $this->comment;
     }
 
     public function getZone(): ?Zone
@@ -143,7 +155,7 @@ class Sensor
         ];
     }
 
-    public function getLastMeasurement(): Measurement
+    public function getLastMeasurement(): bool|Measurement
     {
         return $this->measurement->last();
     }
@@ -161,6 +173,7 @@ class Sensor
     public function getStatus(): array
     {
         if (
+            $this->getLastMeasurement() &&
             $this->getLastMeasurement()->getCreatedAt() >
             (new \DateTime())->sub(new \DateInterval("PT5M"))
         ) {

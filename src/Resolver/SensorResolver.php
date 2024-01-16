@@ -23,9 +23,10 @@ class SensorResolver implements ValueResolverInterface
         yield new SensorDto(
             $request->request->get('name'),
             $request->request->get('macAddress'),
-            $request->request->get('zoneUuid'),
-            $request->request->get('sensorType'),
-            $request->request->get('position'),
+            $request->request->get('comment', ''),
+            $request->request->get('zoneUuid', null),
+            $request->request->get('sensorType', 'sensor.type.default'),
+            $request->request->get('position', 100),
         );
     }
 }

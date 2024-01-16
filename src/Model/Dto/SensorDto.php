@@ -17,7 +17,9 @@ readonly class SensorDto
         #[ConstraintsMacAddress]
         private ?string $macAddress,
 
-        #[Assert\NotBlank]
+        #[Assert\Type('string')]
+        private ?string $comment,
+
         #[Assert\Uuid]
         private ?string $zoneUuid,
 
@@ -35,6 +37,11 @@ readonly class SensorDto
     public function getName(): ?string
     {
         return $this->name;
+    }
+
+    public function getComment(): ?string
+    {
+        return $this->comment;
     }
 
     public function getMacAddress(): ?string

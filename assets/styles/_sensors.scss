@@ -16,30 +16,6 @@
 
   }
 
-  .badge {
-    width: 32px;
-    height: 18px;
-    border-radius: 10px;
-    // background-image: #6B81FA;
-    color: #ffffff;
-    font-size: 13px;
-    text-align: center;
-    line-height: 18px;
-    right: 10px;
-    position: absolute;
-
-    &-co2 {
-      top: 10px;
-      background-image: linear-gradient(90deg, rgba(107, 128, 250), rgba(107, 128, 250, 0.6) 100%);
-    }
-
-    &-no2 {
-      top: 30px;
-      // background-color: #A173CA;
-      background-image: linear-gradient(90deg, rgb(161, 115, 202), rgb(161, 115, 202, 0.6) 100%);
-    }
-  }
-
   .plug {
     position: absolute;
     width: 72.98px;

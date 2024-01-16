@@ -6,6 +6,6 @@
 
 <style scoped lang="scss" module>
 .tooltip_wrapper p {
-  margin-bottom: 14px;
+  padding: 14px 0;
 }
 </style>
