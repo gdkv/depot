@@ -1,11 +1,11 @@
 <script setup>
 import { onMounted, ref, h} from "vue";
-import useCurrentUser from "../../store/user";
+import useCurrentUser from "../../../store/user";
 import * as Turbo from "@hotwired/turbo";
 import { useTippy, roundArrow } from 'vue-tippy';
 import {vMaska, MaskInput} from "maska";
-import MacAddressTooltip from "./tooltip/macAddress.vue";
-import useSensor from "../../store/sensor";
+import MacAddressTooltip from "../../../components/UI/tooltip/macAddress.vue";
+import useSensor from "../../../store/sensor";
 import {
   trans,
   TIME_AGO_NO_DATA,
@@ -15,16 +15,18 @@ import {
   TIME_AGO_YEARS,
   TIME_AGO_MONTHS,
   TIME_AGO_SECONDS
-} from '../../../translator';
+} from '../../../../translator';
 import 'tippy.js/dist/tippy.css';
 import 'tippy.js/themes/light.css'
 import 'tippy.js/dist/svg-arrow.css'
 
-const { sensors, selectedSensor, fetchAll, changeSensor } = useSensor();
+const { sensors, selectedSensor, fetchAll, changeSensor, addSensor } = useSensor();
 const selectSensor = (sensor) => {
   changeSensor(sensor);
 }
 const macAddressTooltip = ref(null);
+const macAddressInput = ref('');
+const sensorNameInput = ref('');
 const { currentUser, fetch } = useCurrentUser();
 
 onMounted(async () => {
@@ -69,7 +71,15 @@ const getLastMeasurementsMessage = (createdAtArray) => {
 }
 
 const onSensorAdd = () => {
-  console.log('sensor add logic');
+  if (
+      sensorNameInput.value !== '' &&
+      macAddressInput.value !== ''
+  ) {
+    addSensor({
+      name: sensorNameInput.value,
+      macAddress: macAddressInput.value,
+    });
+  }
 };
 
 useTippy(macAddressTooltip, {
@@ -91,14 +101,25 @@ useTippy(macAddressTooltip, {
       <div class="form-content">
         <div class="form-inner">
           <div class="form-row">
-            <input placeholder="Mac address" type="text" name="mac" v-maska data-maska required/>
+            <input
+                placeholder="Mac address"
+                v-model="macAddressInput"
+                type="text"
+                v-maska
+                data-maska
+                required
+            />
             <span ref="macAddressTooltip" class="input-badge input-badge_bg" :class="$style.tooltip_badge">
                 ?
             </span>
             <p>You can easily find sensor’s MAC address on backside of corpus, or just scan QR code, and this input will be autofilled</p>
           </div>
           <div class="form-row">
-            <input placeholder="Sensor name" type="text" name="name" required/>
+            <input
+                placeholder="Sensor name"
+                type="text"
+                v-model="sensorNameInput"
+                required/>
           </div>
 
           <button @click="onSensorAdd()">Add</button>
@@ -131,8 +152,11 @@ useTippy(macAddressTooltip, {
           <div class="welasensor-info-mac" v-text="sensor.macAddress" />
           <div class="welasensor-info-name" v-text="sensor.name" />
 
-          <div class="welasensor-info-time" v-text="getLastMeasurementsMessage(sensor.lastMeasurement.createdAtArray)" />
-
+          <div
+              v-if="sensor.lastMeasurement"
+              class="welasensor-info-time"
+              v-text="getLastMeasurementsMessage(sensor.lastMeasurement.createdAtArray)"
+          />
         </div>
       </div>
       <!--      @endforeach-->

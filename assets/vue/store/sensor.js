@@ -6,7 +6,12 @@ const state = reactive({
     sensors: [],
     selectedSensor: {
         id: null,
-        name: null,
+        position: 100,
+        active: false,
+        name: '',
+        slug: '',
+        zone: null,
+        type: 'sensor.type.default',
         macAddress: '00-00-00-00-00-00',
         offsetMeasurement: {
             temperature: [],
@@ -22,7 +27,8 @@ const state = reactive({
                 type: 'days',
                 value: 100
             }
-        }
+        },
+        comment: ''
     }
 });
 
@@ -33,6 +39,12 @@ export default function useSensor() {
         state.selectedSensor = state.sensors[0];
     }
 
+    const addSensor = async (sensor) => {
+        state.sensors.push(
+            await SensorService.add(sensor)
+        );
+    }
+
     const changeSensor = (sensor) => {
         state.selectedSensor = sensor;
     }
@@ -40,7 +52,8 @@ export default function useSensor() {
     return {
         ...toRefs(state),
         fetchAll,
-        changeSensor
+        changeSensor,
+        addSensor
     }
 }
 

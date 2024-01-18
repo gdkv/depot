@@ -14,10 +14,10 @@ class SensorService {
                 'Authorization': `Bearer ${this.token}`
             }
         })
-            .then(response => response.json())
-            .then((sensorList) => {
-                return sensorList;
-            });
+        .then(response => response.json())
+        .then((sensorList) => {
+            return sensorList;
+        });
     }
 
     get(sensorId) {
@@ -36,13 +36,14 @@ class SensorService {
                 name: sensor.name,
                 macAddress: sensor.macAddress,
                 sensorType: 'sensor.type.default',
-
+                position: 100,
+                comment: ''
             })
         })
-            .then(response => response.json())
-            .then((sensorList) => {
-                return sensorList;
-            });
+        .then(response => response.json())
+        .then((sensor) => {
+            return sensor;
+        });
     }
 
     delete() {
