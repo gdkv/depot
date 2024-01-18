@@ -1,20 +1,22 @@
 {% extends 'app.html.twig' %}
 
 {% block content %}
-    {# dump({
-        'sensor': {
-            'macAddress': sensor.getMacAddress(),
-            'id': sensor.getId(),
-            'name': sensor.getName(),
-            'offsetMeasurement': sensor.getOffsetMeasurement(),
-            'lastMeasurement': sensor.getLastMeasurement(),
-            'position': sensor.getPosition(),
-            'active': sensor.getActive(),
-            'slug': sensor.getSlug(),
-            'zone': sensor.getZone(),
-            'type': sensor.getType(),
-            'comment': sensor.getComment()
+
+    <div {{ vue_component('pages/app/sensor/Detail', {
+            'sensor': {
+                'macAddress': sensor.getMacAddress(),
+                'id': sensor.getId(),
+                'name': sensor.getName(),
+                'offsetMeasurement': sensor.getOffsetMeasurement(),
+                'lastMeasurement': sensor.getLastMeasurement(),
+                'position': sensor.getPosition(),
+                'active': sensor.getActive(),
+                'slug': sensor.getSlug(),
+                'zone': sensor.getZone(),
+                'type': sensor.getType(),
+                'comment': sensor.getComment()
+            }
         }
-    }) #}
+    ) }}></div>
 
 {% endblock %}

@@ -67,6 +67,7 @@ const selectMeasurement = (measurementType) => {
   selectedMeasurementType.value = measurementType;
 }
 
+// @todo вынести в сервис так как это нужно тут,
 const getLastMeasurementsMessage = () => {
   const lastMeasurementData = selectedSensor.value.lastMeasurement.createdAtArray;
   if (lastMeasurementData) {
