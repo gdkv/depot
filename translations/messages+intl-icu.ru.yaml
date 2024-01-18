@@ -29,7 +29,14 @@ main:
     buy:
       header: 'Ready to buy new&nbsp;astonishing powerful sensors'
       description: 'Sensors will help you see your apartment micro climate, help to correct the ideal temperature and humidity of the room and stay in touch with it'
-
+    sensor:
+      mac_address_input: 'MAC адрес'
+      name_input: 'Название сенсора'
+      title: 'Ваши сенсоры'
+      add: 'Добавить сенсор'
+      button: 'Добавить'
+      tooltip: 'MAC адрес это уникальный строковый идентификатор вашего сенсора. Он содержит 6 пар символов разделенных черточками. Например: A9-B8-C7-D6-E5-F4'
+      help: 'Вы сможете легко найти MAC адрес вашего сенсора на задней части корпуса, или просто отсканируйте QR код, и тогда данное поле будет автоматически заполнено'
   form:
     login:
       header: 'Войти в аккаунт'

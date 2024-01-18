@@ -14,7 +14,13 @@ import {
   TIME_AGO_DAYS,
   TIME_AGO_YEARS,
   TIME_AGO_MONTHS,
-  TIME_AGO_SECONDS
+  TIME_AGO_SECONDS,
+  MAIN_PAGES_SENSOR_TITLE,
+  MAIN_PAGES_SENSOR_ADD,
+  MAIN_PAGES_SENSOR_HELP,
+  MAIN_PAGES_SENSOR_BUTTON,
+  MAIN_PAGES_SENSOR_MAC_ADDRESS_INPUT,
+  MAIN_PAGES_SENSOR_NAME_INPUT
 } from '../../../../translator';
 import 'tippy.js/dist/tippy.css';
 import 'tippy.js/themes/light.css'
@@ -92,17 +98,17 @@ useTippy(macAddressTooltip, {
 });
 </script>
 <template>
-  <h1>Your sensors</h1>
+  <h1 v-text="trans(MAIN_PAGES_SENSOR_TITLE)" />
 
   <div class="sensors-wrapper">
 
     <div class="add-sensor_form">
-      <h1>Add sensor</h1>
+      <h1 v-text="trans(MAIN_PAGES_SENSOR_ADD)" />
       <div class="form-content">
         <div class="form-inner">
           <div class="form-row">
             <input
-                placeholder="Mac address"
+                :placeholder="trans(MAIN_PAGES_SENSOR_MAC_ADDRESS_INPUT)"
                 v-model="macAddressInput"
                 type="text"
                 v-maska
@@ -112,17 +118,20 @@ useTippy(macAddressTooltip, {
             <span ref="macAddressTooltip" class="input-badge input-badge_bg" :class="$style.tooltip_badge">
                 ?
             </span>
-            <p>You can easily find sensor’s MAC address on backside of corpus, or just scan QR code, and this input will be autofilled</p>
+            <p v-text="trans(MAIN_PAGES_SENSOR_HELP)" />
           </div>
           <div class="form-row">
             <input
-                placeholder="Sensor name"
+                :placeholder="trans(MAIN_PAGES_SENSOR_NAME_INPUT)"
                 type="text"
                 v-model="sensorNameInput"
                 required/>
           </div>
 
-          <button @click="onSensorAdd()">Add</button>
+          <button
+              @click="onSensorAdd()"
+              v-text="trans(MAIN_PAGES_SENSOR_BUTTON)"
+          />
         </div>
       </div>
     </div>

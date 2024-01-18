@@ -1,7 +1,7 @@
 {% extends 'app.html.twig' %}
 
 {% block content %}
-    {% dump({
+    {# dump({
         'sensor': {
             'macAddress': sensor.getMacAddress(),
             'id': sensor.getId(),
@@ -15,6 +15,6 @@
             'type': sensor.getType(),
             'comment': sensor.getComment()
         }
-    }) %}
+    }) #}
 
 {% endblock %}

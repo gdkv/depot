@@ -22,9 +22,16 @@ main:
       depot_rest: 'Depot Rest'
       depot_rest_info: 'If you want to get access to our API data you can write us a mail'
     about:
-      header: 'Информация'
+      header: 'Information'
       description: ''
-
+    sensor:
+      mac_address_input: 'MAC Address'
+      name_input: 'Sensor name'
+      title: 'Your sensors'
+      add: 'Add sensor'
+      button: 'Add'
+      tooltip: 'MAC address is a unique string of your sensor device. It consist of 6 pairs of chars separate by dashes. Ex: A9-B8-C7-D6-E5-F4'
+      help: 'You can easily find sensor’s MAC address on backside of corpus, or just scan QR code, and this input will be autofilled'
   form:
     login:
       header: 'Login to account'
