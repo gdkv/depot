@@ -8,6 +8,7 @@ use App\Repository\Sensor\SensorRepository;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use OpenApi\Attributes as OA;
 use Nelmio\ApiDocBundle\Annotation\Model;
@@ -33,16 +34,28 @@ class ListController extends AbstractController
     )]
     #[OA\Tag(name: 'Сенсор')]
     #[Security(name: 'Bearer')]
-    public function __invoke(SensorRepository $repository): JsonResponse
+    public function __invoke(Request $request, SensorRepository $repository): JsonResponse
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
 
         return $this->jsonResponse(
-            $repository->findBy(
-                ['user' => $this->getUser(), 'active' => true,],
-                ['position' => 'DESC',],
-                100,
-                0
+            array_map(
+                function ($sensor) use ($request) {
+                    return [
+                        ...$sensor->__toArray(),
+                        'detailUrl' => $this->generateUrl('app.sensor.detail', [
+                            // '_locale' => $request->getLocale(),
+                            '_locale' => 'ru',
+                            'slug' => $sensor->getSlug(),
+                        ])
+                    ];
+                },
+                $repository->findBy(
+                    ['user' => $this->getUser(), 'active' => true,],
+                    ['position' => 'DESC',],
+                    100,
+                    0
+                )
             ),
         );
     }

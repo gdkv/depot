@@ -18,11 +18,13 @@ use OpenApi\Attributes as OA;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Ignore;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\UX\Turbo\Attribute\Broadcast;
 
 #[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: SensorRepository::class)]
 #[UniqueEntity(fields: 'macAddress')]
 #[OA\Schema(title: 'Сенсор')]
+#[Broadcast]
 class Sensor
 {
     use EntityIdTrait;
@@ -98,6 +100,24 @@ class Sensor
         $this->active = $active ?? true;
 
         return $this;
+    }
+
+    public function __toArray(): array
+    {
+        return [
+            'name' => $this->getName(),
+            'macAddress' => $this->getMacAddress(),
+            'comment' => $this->getComment(),
+            'zone' => $this->getZone(),
+            'type' => $this->getType(),
+            'position' => $this->getPosition(),
+            'active' => $this->getActive(),
+            'measurement' => $this->getMeasurement(),
+            'offsetMeasurement' => $this->getOffsetMeasurement(),
+            'lastMeasurement' => $this->getLastMeasurement(),
+            'status' => $this->getStatus(),
+            'slug' => $this->getSlug(),
+        ];
     }
 
     public function getMacAddress(): string
@@ -187,5 +207,10 @@ class Sensor
             'value' => false,
             'text' => SensorStatus::Offline,
         ];
+    }
+
+    public function getDetailUrl(): string
+    {
+        return "";
     }
 }

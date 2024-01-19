@@ -28,7 +28,8 @@ const state = reactive({
                 value: 100
             }
         },
-        comment: ''
+        comment: '',
+        detailUrl: ''
     }
 });
 

@@ -71,23 +71,26 @@
       }
     }
 
-    .input {
-      width: 100%;
-      display: inline-block;
-      vertical-align: top;
+    .form-inner {
+      .input {
+        width: 100%;
+        display: inline-block;
+        vertical-align: top;
 
-      &.small {
-        width: 45%;
+        &.small {
+          width: 45%;
 
-        &:nth-child(2n) {
-          margin-left: 10%;
+          &:nth-child(2n) {
+            margin-left: 10%;
+          }
+        }
+
+        input {
+          width: 100%;
         }
       }
-
-      input {
-        width: 100%;
-      }
     }
+
   }
 
   .full-chart {

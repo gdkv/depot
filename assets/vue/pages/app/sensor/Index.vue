@@ -141,7 +141,9 @@ useTippy(macAddressTooltip, {
       <!--      @foreach($sensors as $sensor)-->
       <div v-for="sensor in sensors" class="item" :data-sensor-id="sensor.id" :data-sensor-priority="sensor.priority">
         <div class="item-priority"></div>
-        <a href="#">
+<!--        <a href="/app/sensor/">-->
+        <a :href="sensor.detailUrl" data-turbo-confirm="Do you want to leave this page?">
+<!--        <a href="/articles/54" data-turbo-method="delete" data-turbo-confirm="Are you sure you want to delete the article?">Delete the article</a>-->
           <div class="welasensor">
             <div class="corpus">
               <div class="indicator"></div>
