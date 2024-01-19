@@ -24,7 +24,6 @@ use Symfony\UX\Turbo\Attribute\Broadcast;
 #[ORM\Entity(repositoryClass: SensorRepository::class)]
 #[UniqueEntity(fields: 'macAddress')]
 #[OA\Schema(title: 'Сенсор')]
-#[Broadcast]
 class Sensor
 {
     use EntityIdTrait;
@@ -33,6 +32,7 @@ class Sensor
 
     #[ORM\Column(type: Types::STRING, length: 255)]
     #[ConstraintsMacAddress]
+    #[Assert\Unique]
     #[OA\Property(title: 'MAC адрес', description: 'MAC адрес устройства', type: 'string')]
     private string $macAddress;
 

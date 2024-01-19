@@ -3,6 +3,7 @@
 namespace App\Entity\Traits;
 
 use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Event\PostPersistEventArgs;
 use Doctrine\ORM\Mapping as ORM;
 use OpenApi\Attributes as OA;
 use Symfony\Component\String\Slugger\AsciiSlugger;
@@ -37,11 +38,22 @@ trait EntityNameTrait {
             ->lower();
     }
 
-    #[ORM\PreUpdate]
-    public function onPreUpdate(): void
+    #[ORM\PostPersist]
+    public function onPostPersist(PostPersistEventArgs $arg): void
     {
+        $slug = $this->name . " " . $this->getId()->toBase32();
         $this->slug = (new AsciiSlugger())
-            ->slug($this->name)
+            ->slug($slug)
+            ->lower();
+        $arg->getObjectManager()->flush();
+    }
+
+    #[ORM\PostUpdate]
+    public function onPostUpdate(): void
+    {
+        $slug = $this->name . " " . $this->getId()->toBase32();
+        $this->slug = (new AsciiSlugger())
+            ->slug($slug)
             ->lower();
     }
 }
