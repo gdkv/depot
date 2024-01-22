@@ -37,6 +37,8 @@ class SensorCreateService
         $this->zoneRepository = $zoneRepository;
     }
 
+    // @todo нужно завести таблицу лицензированных сенсоров, с которой будет происходить сверка мак адресов
+    // @todo так же в ней будет указан тип сенсора который и будет присваиваться
     public function __invoke(SensorDto $sensorDto): ?Sensor
     {
         $this->errors = $this->validator->validate($sensorDto);

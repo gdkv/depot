@@ -1,5 +1,5 @@
 <script setup>
-import {onMounted, onUpdated, reactive, ref, watch} from "vue";
+import {reactive, ref, watch} from "vue";
 import useSensor from "../../store/sensor";
 import { Line } from 'vue-chartjs';
 import Switcher from "./switcher.vue";

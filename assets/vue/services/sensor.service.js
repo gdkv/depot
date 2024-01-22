@@ -46,6 +46,28 @@ class SensorService {
         });
     }
 
+    edit(sensor) {
+        return fetch(routes.sensor.edit.url.replace('{sensorId}', sensor.id), {
+            method: routes.sensor.edit.method,
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${this.token}`
+            },
+            body: JSON.stringify({
+                name: sensor.name,
+                macAddress: sensor.macAddress,
+                sensorType: 'sensor.type.default',
+                position: 100,
+                comment: sensor.comment
+            })
+        })
+        .then(response => response.json())
+        .then((sensor) => {
+            return sensor;
+        });
+    }
+
     delete() {
         return {};
     }

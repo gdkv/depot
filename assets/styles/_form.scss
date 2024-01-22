@@ -20,7 +20,9 @@
     }
 
     .form-inner {
-      input:not([type="checkbox"]) {
+
+      input:not([type="checkbox"]),
+      textarea {
         width: 320px;
         height: 35px;
 
@@ -37,6 +39,7 @@
         padding: 0 22px 0;
         box-sizing: border-box;
         z-index: 9;
+        outline: none;
 
         &.is-invalid {
           background: rgba(252, 92, 125, .3);
@@ -46,6 +49,13 @@
           color: #888888;
         }
       }
+
+      textarea {
+        height: 100px;
+        resize: vertical;
+        padding: 10px 22px;
+      }
+
       .form-row{
         position: relative;
         margin-bottom: 30px;

@@ -46,6 +46,16 @@ export default function useSensor() {
         );
     }
 
+    const editSensor = async (sensor) => {
+        const editSensor = await SensorService.edit(sensor);
+        state.sensors.map((sensor) => {
+            if(sensor.id === editSensor.id) {
+                sensor.name = editSensor.name;
+                sensor.comment = editSensor.comment;
+            }
+        });
+    }
+
     const changeSensor = (sensor) => {
         state.selectedSensor = sensor;
     }
@@ -54,7 +64,8 @@ export default function useSensor() {
         ...toRefs(state),
         fetchAll,
         changeSensor,
-        addSensor
+        addSensor,
+        editSensor
     }
 }
 

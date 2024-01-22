@@ -18,7 +18,6 @@ use OpenApi\Attributes as OA;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Ignore;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\UX\Turbo\Attribute\Broadcast;
 
 #[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: SensorRepository::class)]
@@ -32,7 +31,6 @@ class Sensor
 
     #[ORM\Column(type: Types::STRING, length: 255)]
     #[ConstraintsMacAddress]
-    #[Assert\Unique]
     #[OA\Property(title: 'MAC адрес', description: 'MAC адрес устройства', type: 'string')]
     private string $macAddress;
 

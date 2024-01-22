@@ -72,7 +72,8 @@
     }
 
     .form-inner {
-      .input {
+      .input,
+      textarea {
         width: 100%;
         display: inline-block;
         vertical-align: top;

@@ -11,16 +11,23 @@ import {
 import {onMounted, ref} from "vue";
 import Limit from "../../../components/UI/sensor/limit.vue";
 import useMeasurement from "../../../store/measurement";
+import useSensor from "../../../store/sensor";
 
 const {measurementsTypes} = useMeasurement();
+const {editSensor} = useSensor();
 const props = defineProps({
   sensor: Object
 });
 const lastMeasurement = ref("");
+const sensorNameInput = ref("");
+const sensorCommentInput = ref("");
 
 onMounted(() => {
   lastMeasurement.value = getLastMeasurementsMessage(props.sensor.lastMeasurement.createdAtArray);
+  sensorNameInput.value = props.sensor.name;
+  sensorCommentInput.value = props.sensor.comment;
 });
+
 const getLastMeasurementsMessage = (createdAtArray) => {
   if (createdAtArray) {
     switch (createdAtArray.type) {
@@ -42,6 +49,16 @@ const getLastMeasurementsMessage = (createdAtArray) => {
   }
 
 }
+
+const onEditSensor = () => {
+  editSensor({
+    id: props.sensor.id,
+    comment: sensorCommentInput.value,
+    name: sensorNameInput.value,
+    position: 100,
+    macAddress: props.sensor.macAddress,
+  });
+}
 </script>
 
 <template>
@@ -60,11 +77,10 @@ const getLastMeasurementsMessage = (createdAtArray) => {
         <div class="form-content">
           <div class="form-inner">
 
-            <input class="input" placeholder="Name" type="text" name="name" :value="sensor.name">
-            <input class="input" placeholder="Mac address" type="text" name="mac" :value="sensor.macAddress">
-            <button type="submit" class="btn btn-blue">
-              Edit
-            </button>
+            <input class="input" placeholder="Name" type="text" name="name" v-model="sensorNameInput" />
+            <input class="input" placeholder="Mac address" type="text" disabled="disabled" name="mac" :value="sensor.macAddress" />
+            <textarea placeholder="Comment" v-model="sensorCommentInput" />
+            <button @click="onEditSensor" class="btn btn-blue" v-text="`Edit`" />
 
           </div>
 
