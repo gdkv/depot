@@ -5,6 +5,7 @@ namespace App\Controller\Api\Sensor;
 use App\Controller\Api\JsonResponseTrait;
 use App\Entity\Sensor\Sensor;
 use App\Exception\AppException;
+use App\Model\Dto\LimitDto;
 use App\Model\Dto\SensorDto;
 use App\Service\Sensor\SensorCreateService;
 use Nelmio\ApiDocBundle\Annotation\Model;
@@ -24,6 +25,11 @@ class AddController extends AbstractController
      * Этот запрос вернет новый сенсор если он валидный или error
      */
     #[Route(path: '/api/sensor', name: 'api.sensor.add', methods: ['POST'])]
+    #[OA\RequestBody(
+        description: 'Модель сенсора',
+        required: true,
+        content: new Model(type: LimitDto::class)
+    )]
     #[OA\Response(
         response: 200,
         description: '',

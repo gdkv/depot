@@ -16,7 +16,6 @@ use Symfony\Component\Serializer\Annotation\Ignore;
 class Limit
 {
     use EntityIdTrait;
-    use EntityCreatedAtTrait;
 
     #[ORM\Column(type: Types::STRING, enumType: MeasurementType::class)]
     #[OA\Property(
@@ -40,8 +39,46 @@ class Limit
 
 
     public function __construct(
-
+        MeasurementType $type,
+        float $min,
+        float $max,
+        Sensor $sensor,
     ){
+        $this->update($type, $min, $max, $sensor);
+    }
 
+    public function update(
+        MeasurementType $type,
+        float $min,
+        float $max,
+        Sensor $sensor
+    ): self
+    {
+        $this->type = $type;
+        $this->min = $min;
+        $this->max = $max;
+        $this->sensor = $sensor;
+
+        return $this;
+    }
+
+    public function getType(): MeasurementType
+    {
+        return $this->type;
+    }
+
+    public function getMin(): float
+    {
+        return $this->min;
+    }
+
+    public function getMax(): float
+    {
+        return $this->max;
+    }
+
+    public function getSensor(): Sensor
+    {
+        return $this->sensor;
     }
 }

@@ -29,7 +29,7 @@ class RegistrationController extends AbstractController
      */
     #[Route(path: '/api/registration', name: 'api.registration', methods: ['POST'])]
     #[OA\RequestBody(
-        description: 'Модель User DTO',
+        description: 'Модель пользователя',
         required: true,
         content: new Model(type: UserDto::class)
     )]
