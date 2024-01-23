@@ -1,10 +1,10 @@
 <template>
-    <nav :class="$style.sensors">
+    <nav class="sensors">
       <div
           @click="selectSensor(sensor)"
           :class="{
-            [$style.online]: sensor.status.value,
-            [$style.active]: selectedSensor.id === sensor.id
+            'online': sensor.status.value,
+            'active': selectedSensor.macAddress === sensor.macAddress
           }"
           v-for="sensor in sensors"
           :key="sensor.id"
@@ -13,30 +13,27 @@
 </template>
 
 <script setup>
-import {onMounted, ref} from "vue";
-import useSensor from "../../../store/sensor";
+  import {onMounted} from "vue";
+  import useSensor from "../../../store/sensor";
 
-const {sensors, selectedSensor, fetchAll, changeSensor} = useSensor();
-// const selectedSensorId = ref(null);
+  const {sensors, selectedSensor, fetchAll, changeSensor} = useSensor();
 
-onMounted(async () => {
-  await fetchAll();
-  // selectedSensorId.value = selectedSensor.id;
-});
+  onMounted(async () => {
+    await fetchAll();
+  });
 
-const selectSensor = (sensor) => {
-  changeSensor(sensor);
-}
+  const selectSensor = (sensor) => {
+    changeSensor(sensor);
+  }
 </script>
 
-<style lang="scss" module>
+<style lang="scss">
 .sensors {
   display: flex;
   flex-wrap: wrap;
   gap: 25px;
 
   div {
-    background-color: #111111;
     width: 186px;
     height: 32px;
     line-height: 32px;
@@ -61,19 +58,17 @@ const selectSensor = (sensor) => {
       right: 11px;
       width: 6px;
       height: 6px;
-      background-color: #FC5C7D;
-
+      //background-color: #FC5C7D;
       border-radius: 3px;
     }
 
     &.online {
       &::after {
-        background: #6B81FA;
+        background: #FC5C7D;
       }
     }
 
     &.active {
-      background-color: #676767;
       cursor: default;
     }
 

@@ -65,6 +65,10 @@ body {
               color: #2a2a2a;
             }
           }
+
+          .is-limit {
+            color: #2a2a2a;
+          }
         }
       }
       .full-chart {
@@ -122,7 +126,7 @@ body {
     }
 
     .sensors {
-      a {
+      div {
         background: #ffffff;
         color: #333333;
 

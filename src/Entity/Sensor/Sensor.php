@@ -73,11 +73,11 @@ class Sensor
     //private AccessLevelType $accessLevel;
 
     // #[ORM\Column(type: Types::BOOLEAN)]
-    // #[OA\Property(title: 'Двухфакторная аутентификация', type: 'bool')]
+    // #[OA\Property(title: 'Получать отчет для данного сенсора', type: 'bool')]
     // private bool $isReported;
 
     // #[ORM\Column(type: Types::BOOLEAN)]
-    // #[OA\Property(title: 'Темная тема', type: 'bool')]
+    // #[OA\Property(title: 'Получать оповещения если значения выходят за заданые лимиты', type: 'bool')]
     // private bool $isAlerted;
 
     public function __construct(

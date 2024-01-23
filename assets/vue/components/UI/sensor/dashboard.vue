@@ -4,16 +4,16 @@
       {{ trans(TIME_AGO_TITLE) }}: {{ lastMeasurement }}
     </div>
 
-    <div :class="$style.last_data" data-slideout-ignore>
+    <div class="last-data" data-slideout-ignore>
       <div @click="selectMeasurement(type)" :class="{
-        [$style.data]: true,
-        [$style.active]: selectedMeasurementType === type
+        'data': true,
+        'active': selectedMeasurementType === type
       }" v-for="(measurement, type) in measurementsTypes">
         <data-graph :measure="measurement.measures" :color="measurement.color" />
-        <div :class="$style.is_limit" v-text="measurement.isLimit ? 'lim' : ''"/>
-        <div :class="$style.data_info">
-          <div :class="$style.name" v-html="measurement.name" />
-          <div :class="$style.value" v-text="measurement.measures[measurement.measures.length - 1]" />
+        <div class="is-limit" v-text="measurement.isLimit ? 'lim' : ''"/>
+        <div class="data-info">
+          <div class="name" v-html="measurement.name" />
+          <div class="value" v-text="measurement.measures[measurement.measures.length - 1]" />
         </div>
       </div>
     </div>
@@ -97,8 +97,8 @@ const getLastMeasurementsMessage = () => {
 }
 </script>
 
-<style lang="scss" module>
- .last_data {
+<style lang="scss" scoped>
+ .last-data {
    display: flex;
    justify-content: space-between;
    margin: 55px 0;
@@ -113,13 +113,13 @@ const getLastMeasurementsMessage = () => {
      box-sizing: border-box;
      position: relative;
      overflow: hidden;
-     background: #343434;
+     //background: #343434;
 
      &.active {
-       background: #434343;
+       //background: #434343;
      }
 
-     &_info {
+     &-info {
        z-index: 12;
        padding: 17px;
        box-sizing: border-box;
@@ -150,7 +150,7 @@ const getLastMeasurementsMessage = () => {
        }
      }
 
-     .is_limit {
+     .is-limit {
        text-align: right;
        width: 100%;
        font-family: 'Georgia', serif;
@@ -158,7 +158,7 @@ const getLastMeasurementsMessage = () => {
        font-weight: 300;
        font-size: 16.5px;
        line-height: 19px;
-       color: #FFFFFF;
+       //color: #FFFFFF;
        box-sizing: border-box;
        padding: 17px;
        z-index: 12;

@@ -5,7 +5,7 @@ import SensorService from "../services/sensor.service";
 const state = reactive({
     sensors: [],
     selectedSensor: {
-        id: null,
+        id: '33caa00a-bbb0cc-333ed',
         position: 100,
         active: false,
         name: '',
@@ -38,6 +38,7 @@ export default function useSensor() {
     const fetchAll = async () => {
         state.sensors = await SensorService.list();
         state.selectedSensor = state.sensors[0];
+        console.log(state.selectedSensor);
     }
 
     const addSensor = async (sensor) => {

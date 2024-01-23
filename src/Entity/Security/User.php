@@ -3,6 +3,8 @@
 namespace App\Entity\Security;
 
 use App\Entity\Traits\EntityIdTrait;
+use App\Model\Enum\ReportFormatType;
+use App\Model\Enum\ReportPeriodType;
 use App\Repository\Security\UserRepository;
 use OpenApi\Attributes as OA;
 use Doctrine\DBAL\Types\Types;
@@ -50,10 +52,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     //     new Assert\NotBlank,
     //     new Assert\Email,
     // ])]
-    // #[OA\Property(title: 'Email для отчетов', type: 'string')]
+    // #[OA\Property(title: 'Адреса для отчетов', type: 'string')]
     // #[OA\Property(
-    //     title: 'Email для отчетов',
-    //     description: 'Массив почтовых адресов для отчетов',
+    //     title: 'Адреса для отчетов',
+    //     description: 'Массив почтовых адресов для получения отчетов',
     //     type: 'array',
     //     items: new OA\Items(type: 'string')
     // )]
@@ -83,6 +85,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     // #[ORM\Column(type: Types::BOOLEAN)]
     // #[OA\Property(title: 'Темная тема', type: 'bool')]
     // private bool $isDarkMode;
+
+    // #[ORM\Column(type: Types::BOOLEAN)]
+    // #[OA\Property(title: 'Получать отчеты', type: 'bool')]
+    // private bool $isReported;
+
+    // #[ORM\Column(type: Types::STRING, enumType: ReportFormatType::class)]
+    // #[OA\Property(
+    //     description: 'Формат отчета',
+    //     enum: ReportFormatType::class,
+    //     example: ReportFormatType::Csv
+    // )]
+    // private ReportFormatType $type;
+    //
+    // #[ORM\Column(type: Types::STRING, enumType: ReportPeriodType::class)]
+    // #[OA\Property(
+    //     description: 'Периодичность отчета',
+    //     enum: ReportPeriodType::class,
+    //     example: ReportPeriodType::Monthly
+    // )]
+    // private ReportPeriodType $period;
 
     public function __construct(
         string $email,
