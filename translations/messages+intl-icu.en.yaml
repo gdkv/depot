@@ -61,6 +61,17 @@ sensor:
     electric: 'Electric'
     aqua: 'Aqua'
     motion: 'Motion'
+  access:
+    private: "Private"
+    guest: "Guest"
+    link: "Link"
+    public: "Public"
+
+account:
+  type:
+    start: "Start"
+    pro: "Pro"
+    ultimate: "Ultimate"
 
 measurements:
   temperature: 'Temperature'

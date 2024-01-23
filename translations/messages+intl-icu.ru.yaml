@@ -53,6 +53,17 @@ sensor:
     electric: 'Электричество'
     aqua: 'Водный'
     motion: 'Движение'
+  access:
+    private: "Закрытый"
+    guest: "Гостевой"
+    link: "По ссылке"
+    public: "Публичный"
+
+account:
+  type:
+    start: "Старт"
+    pro: "Про"
+    ultimate: "Супер"
 
 measurements:
   temperature: 'Температура'

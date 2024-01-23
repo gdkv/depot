@@ -2,7 +2,6 @@
 
 namespace App\Entity\Sensor;
 
-use App\Entity\Traits\EntityCreatedAtTrait;
 use App\Entity\Traits\EntityIdTrait;
 use App\Model\Enum\MeasurementType;
 use App\Repository\Sensor\LimitRepository;

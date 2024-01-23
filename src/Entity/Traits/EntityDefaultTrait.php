@@ -28,6 +28,13 @@ trait EntityDefaultTrait {
         return $this->active;
     }
 
+    public function activate(): self
+    {
+        $this->active = true;
+
+        return $this;
+    }
+
     public function deactivate(): self
     {
         $this->active = false;

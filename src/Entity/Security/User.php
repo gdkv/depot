@@ -45,6 +45,45 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[OA\Property(title: 'Имя', description: 'Имя пользователя', type: 'string')]
     private string $name;
 
+    // #[ORM\Column(type: Types::JSON)]
+    // #[Assert\All([
+    //     new Assert\NotBlank,
+    //     new Assert\Email,
+    // ])]
+    // #[OA\Property(title: 'Email для отчетов', type: 'string')]
+    // #[OA\Property(
+    //     title: 'Email для отчетов',
+    //     description: 'Массив почтовых адресов для отчетов',
+    //     type: 'array',
+    //     items: new OA\Items(type: 'string')
+    // )]
+    // private ?array $email;
+
+    // #[ORM\Column(type: Types::STRING, enumType: AccountType::class)]
+    // #[Assert\NotBlank]
+    // #[OA\Property(
+    //     description: 'Выбранный тип аккаунта',
+    //     enum: AccountType::class,
+    //     example: AccountType::Start
+    // )]
+    // private AccountType $lang;
+
+    // #[ORM\Column(type: Types::STRING)]
+    // #[OA\Property(title: 'Язык', description: 'Выбранный язык системы', type: 'string')]
+    // private string $lang;
+
+    // #[ORM\Column(type: Types::STRING)]
+    // #[OA\Property(title: 'Телеграм ID', description: 'Аккаунт Телеграм, type: 'string')]
+    // private string $telegram;
+
+    // #[ORM\Column(type: Types::BOOLEAN)]
+    // #[OA\Property(title: 'Двухфакторная аутентификация', description: 'Код для входа будет отправлен в Телеграм', type: 'bool')]
+    // private bool $twoFA;
+
+    // #[ORM\Column(type: Types::BOOLEAN)]
+    // #[OA\Property(title: 'Темная тема', type: 'bool')]
+    // private bool $isDarkMode;
+
     public function __construct(
         string $email,
         string $name,

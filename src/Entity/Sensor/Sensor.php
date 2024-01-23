@@ -63,6 +63,23 @@ class Sensor
     #[OA\Property(description: 'Комментарий')]
     private ?string $comment;
 
+    // #[ORM\Column(type: Types::STRING, enumType: AccessLevelType::class)]
+    // #[Assert\NotBlank]
+    // #[OA\Property(
+    //     description: 'Уровень видимости сенсора',
+    //     enum: AccessLevelType::class,
+    //     example: AccessLevelType::Private
+    // )]
+    //private AccessLevelType $accessLevel;
+
+    // #[ORM\Column(type: Types::BOOLEAN)]
+    // #[OA\Property(title: 'Двухфакторная аутентификация', type: 'bool')]
+    // private bool $isReported;
+
+    // #[ORM\Column(type: Types::BOOLEAN)]
+    // #[OA\Property(title: 'Темная тема', type: 'bool')]
+    // private bool $isAlerted;
+
     public function __construct(
         string $name,
         string $macAddress,
