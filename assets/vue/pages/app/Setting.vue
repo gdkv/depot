@@ -24,7 +24,7 @@
             </div>
 
             <div class="form-row">
-              <div class="select">
+              <div class="custom-select">
                 <select name="lang">
                   <option>Select language</option>
                   <option value="en" selected>English</option>
