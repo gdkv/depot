@@ -1,5 +1,6 @@
 <script setup>
-import { onMounted, ref, h} from "vue";
+import {onMounted, ref, h} from "vue";
+// import router from
 import useCurrentUser from "../../../store/user";
 import * as Turbo from "@hotwired/turbo";
 import { useTippy, roundArrow } from 'vue-tippy';
@@ -30,9 +31,10 @@ const { sensors, selectedSensor, fetchAll, changeSensor, addSensor } = useSensor
 const selectSensor = (sensor) => {
   changeSensor(sensor);
 }
+const urlParams = new URLSearchParams(window.location.search);
 const macAddressTooltip = ref(null);
-const macAddressInput = ref('');
 const sensorNameInput = ref('');
+const macAddressInput = ref(urlParams.get('mac'));
 const { currentUser, fetch } = useCurrentUser();
 
 onMounted(async () => {
