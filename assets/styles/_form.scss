@@ -48,6 +48,10 @@
 
         &:disabled {
           color: #888888;
+
+          &::placeholder {
+            color: #2a2a2a;
+          }
         }
       }
 

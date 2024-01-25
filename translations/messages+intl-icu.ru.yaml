@@ -43,6 +43,15 @@ main:
       email: 'Почта'
       password: 'Пароль'
       submit: 'Войти'
+  settings:
+    title: 'Настройки'
+    profile: 'Профиль'
+    password: 'Сменить пароль'
+    account: 'Тип аккаунта'
+  reports:
+    title: 'Отчеты'
+  notify:
+    title: 'Оповещения'
 
 exceptions:
   user_create_exception: 'Ошибка при создании пользователя'

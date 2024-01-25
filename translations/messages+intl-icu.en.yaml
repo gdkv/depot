@@ -39,6 +39,16 @@ main:
       password: 'Password'
       submit: 'Sign in'
 
+  settings:
+    title: 'Settings'
+    profile: 'Profile'
+    password: 'Change password'
+    account: 'Account type'
+  reports:
+    title: 'Reports'
+  notify:
+    title: 'Notify'
+
 exceptions:
   user_create_exception: 'Error while user creation'
 

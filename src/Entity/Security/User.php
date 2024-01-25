@@ -2,10 +2,12 @@
 
 namespace App\Entity\Security;
 
+use App\Entity\Main\Payment;
 use App\Entity\Traits\EntityIdTrait;
 use App\Model\Enum\ReportFormatType;
 use App\Model\Enum\ReportPeriodType;
 use App\Repository\Security\UserRepository;
+use Doctrine\ORM\PersistentCollection;
 use OpenApi\Attributes as OA;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -61,15 +63,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     // )]
     // private ?array $email;
 
-    // #[ORM\Column(type: Types::STRING, enumType: AccountType::class)]
-    // #[Assert\NotBlank]
-    // #[OA\Property(
-    //     description: 'Выбранный тип аккаунта',
-    //     enum: AccountType::class,
-    //     example: AccountType::Start
-    // )]
-    // private AccountType $lang;
-
     // #[ORM\Column(type: Types::STRING)]
     // #[OA\Property(title: 'Язык', description: 'Выбранный язык системы', type: 'string')]
     // private string $lang;
@@ -105,6 +98,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     //     example: ReportPeriodType::Monthly
     // )]
     // private ReportPeriodType $period;
+
+    // #[ORM\OneToMany(mappedBy: "user", targetEntity: Payment::class, cascade: ["persist"], orphanRemoval: true)]
+    // #[ORM\OrderBy(["createdAt" => "DESC"])]
+    // #[OA\Property(description: 'Список платежей', type: 'array', items: new OA\Items(type: Payment::class))]
+    // private PersistentCollection $orders;
 
     public function __construct(
         string $email,
