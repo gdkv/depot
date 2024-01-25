@@ -1,5 +1,11 @@
 <script setup>
 
+import CustomSelect from "../../components/UI/customSelect.vue";
+
+const changeSelect = (event) => {
+  console.log('select is change');
+  console.log(event);
+}
 </script>
 
 <template>
@@ -24,13 +30,20 @@
             </div>
 
             <div class="form-row">
-              <div class="custom-select">
-                <select name="lang">
-                  <option>Select language</option>
-                  <option value="en" selected>English</option>
-                  <option value="ru">Русский</option>
-                </select>
-              </div>
+<!--              <div class="custom-select">-->
+<!--                <select name="lang">-->
+<!--                  <option>Select language</option>-->
+<!--                  <option value="en" selected>English</option>-->
+<!--                  <option value="ru">Русский</option>-->
+<!--                </select>-->
+<!--              </div>-->
+
+              <custom-select
+                  :options="['go', 'python', 'rust', 'javascript']"
+                  :default="'go'"
+                  class="select"
+                  @input="changeSelect($event)"
+              />
             </div>
 
             <button type="submit" class="btn btn-blue">

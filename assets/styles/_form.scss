@@ -22,7 +22,8 @@
     .form-inner {
 
       input:not([type="checkbox"]),
-      textarea {
+      textarea,
+      .custom-select {
         width: 320px;
         height: 35px;
 

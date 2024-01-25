@@ -141,5 +141,17 @@ body {
         background-color: #dfdfdf;
       }
     }
+
+    .custom-select {
+      background: #ffffff;
+      color: #2A2A2A;
+
+      .selected {
+        &:after {
+          border-color: #2A2A2A transparent transparent transparent;;
+        }
+      }
+    }
   }
 }
+
