@@ -3,7 +3,6 @@
 namespace App\Model\Dto;
 
 use App\Entity\Sensor\Sensor;
-use App\Validator\ConstraintsMacAddress;
 use Symfony\Component\Validator\Constraints as Assert;
 
 readonly class MeasurementAddDto
@@ -12,30 +11,24 @@ readonly class MeasurementAddDto
         #[Assert\NotBlank]
         #[Assert\Type(Sensor::class)]
         private ?Sensor $sensor,
-        #[Assert\NotBlank]
         #[Assert\Type('float')]
         #[Assert\Range(min: -273, max: 180)]
         private null|string|float  $temperature,
-        #[Assert\NotBlank]
         #[Assert\Type('float')]
         #[Assert\PositiveOrZero]
         private null|string|float  $humidity,
-        #[Assert\NotBlank]
         #[Assert\Positive]
         #[Assert\Type('float')]
         #[Assert\Range(min: 600, max: 800)]
         private null|string|float  $pressure,
-        #[Assert\NotBlank]
         #[Assert\PositiveOrZero]
         #[Assert\Type('float')]
         #[Assert\Range(min: 0, max: 200000)]
         private null|string|float  $lux,
-        #[Assert\NotBlank]
         #[Assert\PositiveOrZero]
         #[Assert\Type('float')]
         #[Assert\Range(min: 0, max: 200)]
         private null|string|float  $decibel,
-        #[Assert\NotBlank]
         #[Assert\PositiveOrZero]
         #[Assert\Type('float')]
         #[Assert\Range(min: 0, max: 1500)]

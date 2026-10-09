@@ -35,13 +35,18 @@ class MeasurementCreateService
     // @todo так же в ней будет указан тип сенсора который и будет присваиваться
     public function __invoke(MeasurementAddDto $measurementDto): Measurement
     {
+        $this->errors = $this->validator->validate($measurementDto);
+        if (count($this->errors) > 0) {
+            throw new MeasurementCreateException($this->errors);
+        }
+
         $this->measurement = new Measurement(
-            $measurementDto->getHumidity(),
-            $measurementDto->getPressure(),
-            $measurementDto->getCo2(),
-            $measurementDto->getTemperature(),
-            $measurementDto->getLux(),
-            $measurementDto->getDecibel(),
+            $this->toFloat($measurementDto->getHumidity()),
+            $this->toFloat($measurementDto->getPressure()),
+            $this->toFloat($measurementDto->getCo2()),
+            $this->toFloat($measurementDto->getTemperature()),
+            $this->toFloat($measurementDto->getLux()),
+            $this->toFloat($measurementDto->getDecibel()),
             $measurementDto->getSensor(),
         );
 
@@ -54,5 +59,10 @@ class MeasurementCreateService
         $this->entityManager->flush();
 
         return $this->measurement;
+    }
+
+    private function toFloat(null|string|float $value): ?float
+    {
+        return null === $value ? null : (float) $value;
     }
 }

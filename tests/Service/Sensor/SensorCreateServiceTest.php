@@ -17,11 +17,12 @@ use Symfony\Component\Uid\Uuid;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
+use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class SensorCreateServiceTest extends TestCase
 {
-    private const VALID_MAC = '00:11:22:33:44:55';
+    private const VALID_MAC = 'BC-DD-88-ED-4D-FF';
 
     public function testCreateSensorWithoutZone(): void
     {
@@ -178,6 +179,56 @@ class SensorCreateServiceTest extends TestCase
         );
     }
 
+    /**
+     * @dataProvider provideInvalidMacAddresses
+     */
+    public function testThrowsExceptionWhenMacAddressIsInvalid(string $macAddress): void
+    {
+        $security = $this->createMock(Security::class);
+        $security->expects($this->never())->method('getUser');
+
+        $zoneRepository = $this->createMock(ZoneRepository::class);
+        $zoneRepository->expects($this->never())->method('find');
+
+        $entityManager = $this->createMock(EntityManagerInterface::class);
+        $entityManager->expects($this->never())->method('persist');
+        $entityManager->expects($this->never())->method('flush');
+
+        $dto = new SensorDto(
+            'Sensor name',
+            $macAddress,
+            'some comment',
+            null,
+            SensorType::Default->value,
+            100,
+        );
+
+        try {
+            $this->createService(
+                $entityManager,
+                $this->createRealValidator(),
+                $security,
+                $zoneRepository
+            )($dto);
+            self::fail('Ожидалось исключение SensorCreateException');
+        } catch (SensorCreateException $exception) {
+            self::assertSame(2, $exception->getErrorCode());
+            self::assertSame('macAddress', $exception->getErrorData()['propertyPath']);
+            self::assertStringContainsString('not a valid mac address', $exception->getErrorData()['message']);
+        }
+    }
+
+    public function provideInvalidMacAddresses(): array
+    {
+        return [
+            'буквы' => ['invalid-mac'],
+            'пропущен октет' => ['00:11:22:33:44'],
+            'недопустимые символы' => ['zz:zz:zz:zz:zz:zz'],
+            'слишком много символов' => ['00:11:22:33:44:55:66'],
+            'без разделителей' => ['00112233445566'],
+        ];
+    }
+
     private function createService(
         EntityManagerInterface $entityManager,
         ValidatorInterface $validator,
@@ -197,6 +248,13 @@ class SensorCreateServiceTest extends TestCase
             SensorType::Default->value,
             100,
         );
+    }
+
+    private function createRealValidator(): ValidatorInterface
+    {
+        return Validation::createValidatorBuilder()
+            ->enableAnnotationMapping()
+            ->getValidator();
     }
 
     private function emptyViolations(): ConstraintViolationListInterface
