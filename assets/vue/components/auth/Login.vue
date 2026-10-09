@@ -61,7 +61,6 @@
 .form_wrapper {
   .form {
     .password__input {
-      font-family: monospace;
 
       &::placeholder {
         font-family: 'Gilroy', sans-serif;

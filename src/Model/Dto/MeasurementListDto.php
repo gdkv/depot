@@ -7,7 +7,7 @@ use App\Model\Enum\PeriodType;
 use App\Validator\ConstraintsMacAddress;
 use Symfony\Component\Validator\Constraints as Assert;
 
-readonly class MeasurementDto
+readonly class MeasurementListDto
 {
     public function __construct(
         #[Assert\NotBlank]

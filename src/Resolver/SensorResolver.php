@@ -24,7 +24,7 @@ class SensorResolver implements ValueResolverInterface
             $request->request->get('name'),
             $request->request->get('macAddress'),
             $request->request->get('comment', ''),
-            $request->request->get('zoneUuid', null),
+            $request->request->get('zoneUuid'),
             $request->request->get('sensorType', 'sensor.type.default'),
             $request->request->get('position', 100),
         );

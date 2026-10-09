@@ -5,7 +5,7 @@ namespace App\Controller\Api\Measurement;
 use App\Controller\Api\JsonResponseTrait;
 use App\Entity\Sensor\Measurement;
 use App\Entity\Sensor\Sensor;
-use App\Model\Dto\MeasurementDto;
+use App\Model\Dto\MeasurementListDto;
 use App\Model\Enum\MeasurementType;
 use App\Model\Enum\PeriodType;
 use App\Repository\Sensor\MeasurementRepository;
@@ -27,7 +27,7 @@ class ListController extends AbstractController
      *
      * Этот запрос вернет список измерений текущего сенсора пользователя
      */
-    #[Route(path: '/api/measurement', name: 'api.measurement.list', methods: ['POST'])]
+    #[Route(path: '/api/measurement', name: 'api.measurement.list', methods: ['GET'])]
     #[OA\Response(
         response: 200,
         description: '',
@@ -36,14 +36,14 @@ class ListController extends AbstractController
             items: new OA\Items(ref: new Model(type: Measurement::class))
         )
     )]
-    #[OA\RequestBody(content: new Model(type: MeasurementDto::class))]
+    #[OA\RequestBody(content: new Model(type: MeasurementListDto::class))]
     #[OA\Tag(name: 'Измерения')]
     #[Security(name: 'Bearer')]
     public function __invoke(
-        MeasurementDto $measurementDto,
+        MeasurementListDto    $measurementDto,
         MeasurementRepository $repository,
-        SensorRepository $sensorRepository,
-        ValidatorInterface $validator
+        SensorRepository      $sensorRepository,
+        ValidatorInterface    $validator
     ): JsonResponse
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
