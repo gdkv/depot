@@ -11,4 +11,5 @@ class MeasurementCreateException extends AppException
 {
     protected const ERROR_KEY = 'Measurement_create_exception';
     protected const ERROR_CODE = 6;
+    protected const ERROR_MESSAGE = 'Measurement create error';
 }

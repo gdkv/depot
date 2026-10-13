@@ -8,6 +8,16 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 trait JsonResponseTrait
 {
+    private const IGNORED_ATTRIBUTES = [
+        '__cloner__',
+        '__initializer__',
+        '__isInitialized__',
+        'lazyObjectState',
+        'group',
+        'lazyPropertiesNames',
+        'lazyPropertiesDefaults',
+        'transitions',
+    ];
 
     public function __construct(
         private SerializerInterface $serializer,
@@ -26,7 +36,9 @@ trait JsonResponseTrait
                 'status' => $code,
                 'message' => $message,
                 'data' => $data,
-            ], 'json'),
+            ], 'json', [
+                AbstractNormalizer::IGNORED_ATTRIBUTES => self::IGNORED_ATTRIBUTES,
+            ]),
             $httpCode,
             $headers,
             true
@@ -44,15 +56,7 @@ trait JsonResponseTrait
                 $data,
                 'json',
                 [
-                    AbstractNormalizer::IGNORED_ATTRIBUTES => [
-                        '__cloner__',
-                        '__initializer__',
-                        '__isInitialized__',
-                        'group',
-                        'lazyPropertiesNames',
-                        'lazyPropertiesDefaults',
-                        'transitions',
-                    ]
+                    AbstractNormalizer::IGNORED_ATTRIBUTES => self::IGNORED_ATTRIBUTES,
                 ]
             ),
             $httpCode,

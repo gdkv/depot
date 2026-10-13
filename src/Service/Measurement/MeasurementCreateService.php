@@ -37,6 +37,7 @@ class MeasurementCreateService
     {
         $this->errors = $this->validator->validate($measurementDto);
         if (count($this->errors) > 0) {
+
             throw new MeasurementCreateException($this->errors);
         }
 

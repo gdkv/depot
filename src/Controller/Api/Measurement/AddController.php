@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use OpenApi\Attributes as OA;
 use Nelmio\ApiDocBundle\Annotation\Model;
+use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Throwable;
 
@@ -48,17 +49,6 @@ class AddController extends AbstractController
         ValidatorInterface    $validator
     ): JsonResponse
     {
-
-        $errors = $validator->validate($measurementDto);
-
-        if (count($errors) > 0) {
-            return $this->jsonResponseError(
-                "Not valid MeasurementDto",
-                'not_valid_measurement_dto',
-                [ ...$errors, ],
-            );
-        }
-
         try {
             $measurement = ($measurementCreateService)($measurementDto);
         } catch (MeasurementCreateException $e) {
@@ -66,9 +56,7 @@ class AddController extends AbstractController
             return $this->jsonResponseError(
                 $e->getMessage(),
                 $e->getCode(),
-                [
-                    'mac address' => $measurementDto->getSensor()->getMacAddress(),
-                ]
+                $e->getErrorData()
             );
         } catch (Throwable $e) {
             return $this->jsonResponseError(
