@@ -19,6 +19,13 @@ security:
                 check_path: /api/auth
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
+        measurement:
+            pattern: ^/api/measurement
+            stateless: true
+            entry_point: App\Security\ApiKeyAuthenticator
+            jwt: ~
+            custom_authenticators:
+                - App\Security\ApiKeyAuthenticator
         api:
             pattern: ^/api
             stateless: true
@@ -42,6 +49,7 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/api/(auth|registration|doc), roles: PUBLIC_ACCESS }
+        - { path: ^/api/measurement/latest, roles: ROLE_USER }
         - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
 #        - { path: ^/(en|ru)/app, roles: ROLE_USER }
 

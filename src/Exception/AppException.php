@@ -12,6 +12,7 @@ class AppException extends HttpException implements AppExceptionInterface
 {
     protected const RESPONSE_CODE = Response::HTTP_INTERNAL_SERVER_ERROR;
     protected const ERROR_KEY = 'errors.internal_error';
+    protected const ERROR_MESSAGE = 'Internal error';
     protected const ERROR_CODE = 0;
 
     protected ?ConstraintViolationListInterface $errorData;
@@ -62,6 +63,6 @@ class AppException extends HttpException implements AppExceptionInterface
     public function getErrorMessage(): string
     {
         // $tr = new TranslatableMessage(static::ERROR_KEY, [], 'messages');
-        return static::ERROR_KEY;
+        return static::ERROR_MESSAGE ?? static::ERROR_KEY;
     }
 }
